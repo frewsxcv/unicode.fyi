@@ -1,5 +1,7 @@
 use unicode_segmentation::UnicodeSegmentation;
 use unic::ucd::{name_aliases_of, Name, NameAliasType, Lowercase, GraphemeClusterBreak};
+use unic::segment::Words;
+use unic::segment::Graphemes;
 use wasm_bindgen::prelude::*;
 use std::io;
 
@@ -29,12 +31,16 @@ fn main() -> io::Result<()> {
     let mut buffer = String::new();
     io::stdin().read_line(&mut buffer)?;
 
-    for grapheme_cluster in buffer.graphemes(true) {
-        println!("cluster");
-        for char_info in grapheme_cluster.chars().map(CharInfo::from_char) {
-            println!("{:?}", char_info);
+    for word in Words::new(&buffer, |_| true) {
+        println!("word");
+        for grapheme_cluster in Graphemes::new(word) {
+            println!("\tcluster");
+            for char_info in grapheme_cluster.chars().map(CharInfo::from_char) {
+                println!("\t\t{:?}", char_info);
+            }
         }
     }
+
 
     Ok(())
 }
