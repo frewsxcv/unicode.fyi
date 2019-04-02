@@ -2,7 +2,6 @@ use std::io;
 use unic::segment::Graphemes;
 use unic::segment::Words;
 use unic::ucd::{name_aliases_of, GraphemeClusterBreak, Lowercase, Name, NameAliasType};
-use unicode_segmentation::UnicodeSegmentation;
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]

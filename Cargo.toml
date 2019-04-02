@@ -5,6 +5,5 @@ authors = ["Corey Farwell <coreyf@rwell.org>"]
 edition = "2018"
 
 [dependencies]
-unicode-segmentation = "*"
 unic = "0.9.0"
 wasm-bindgen = "0.2"
