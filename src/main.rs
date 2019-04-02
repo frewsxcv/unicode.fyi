@@ -1,7 +1,7 @@
 use std::io;
 use unic::segment::Graphemes;
 use unic::segment::Words;
-use unic::ucd::{name_aliases_of, Age, GraphemeClusterBreak, Lowercase, Name, NameAliasType, Uppercase, WhiteSpace};
+use unic::ucd::{name_aliases_of, Age, Alphabetic, GraphemeClusterBreak, Lowercase, Name, NameAliasType, Uppercase, WhiteSpace};
 // use wasm_bindgen::prelude::*;
 
 // #[wasm_bindgen]
@@ -10,6 +10,7 @@ struct CharInfo {
     char: char,
     display: String,
     name: String,
+    is_alphabetic: bool,
     is_lowercase: bool,
     is_uppercase: bool,
     is_white_space: bool,
@@ -28,6 +29,7 @@ impl CharInfo {
             is_white_space: WhiteSpace::of(c).as_bool(),
             grapheme_cluster_break: format!("{:?}", GraphemeClusterBreak::of(c)),
             age: char_age(c),
+            is_alphabetic: Alphabetic::of(c).as_bool(),
         }
     }
 }
