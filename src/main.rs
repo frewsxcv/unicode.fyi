@@ -1,9 +1,9 @@
-use unicode_segmentation::UnicodeSegmentation;
-use unic::ucd::{name_aliases_of, Name, NameAliasType, Lowercase, GraphemeClusterBreak};
-use unic::segment::Words;
-use unic::segment::Graphemes;
-use wasm_bindgen::prelude::*;
 use std::io;
+use unic::segment::Graphemes;
+use unic::segment::Words;
+use unic::ucd::{name_aliases_of, GraphemeClusterBreak, Lowercase, Name, NameAliasType};
+use unicode_segmentation::UnicodeSegmentation;
+use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
 #[derive(Debug)]
@@ -41,7 +41,6 @@ fn main() -> io::Result<()> {
         }
     }
 
-
     Ok(())
 }
 
@@ -54,10 +53,10 @@ fn char_display(c: char) -> String {
 }
 
 fn char_name(c: char) -> String {
-    Name::of(c).map(|n| n.to_string()).unwrap_or_else(|| {
-        match name_aliases_of(c, NameAliasType::NameAbbreviations) {
-            Some(abbrs) => abbrs[0].to_owned(),
-            None => "<none>".to_owned(),
-        }
-    })
+    Name::of(c)
+        .map(|n| n.to_string())
+        .or_else(|| {
+            name_aliases_of(c, NameAliasType::NameAbbreviations).map(|abbrs| abbrs[0].to_owned())
+        })
+        .unwrap_or_else(|| "<none>".to_owned())
 }
