@@ -2,8 +2,8 @@ use std::io;
 use unic::segment::Graphemes;
 use unic::segment::Words;
 use unic::ucd::{
-    name_aliases_of, Age, Alphabetic, GeneralCategory, GraphemeClusterBreak, Lowercase, Name, NameAliasType,
-    Uppercase, WhiteSpace,
+    name_aliases_of, Age, Alphabetic, GeneralCategory, GraphemeClusterBreak, Lowercase, Name,
+    NameAliasType, Uppercase, WhiteSpace,
 };
 // use wasm_bindgen::prelude::*;
 
