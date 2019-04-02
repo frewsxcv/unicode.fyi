@@ -1,7 +1,10 @@
 use std::io;
 use unic::segment::Graphemes;
 use unic::segment::Words;
-use unic::ucd::{name_aliases_of, Age, Alphabetic, GraphemeClusterBreak, Lowercase, Name, NameAliasType, Uppercase, WhiteSpace};
+use unic::ucd::{
+    name_aliases_of, Age, Alphabetic, GraphemeClusterBreak, Lowercase, Name, NameAliasType,
+    Uppercase, WhiteSpace,
+};
 // use wasm_bindgen::prelude::*;
 
 // #[wasm_bindgen]
@@ -72,7 +75,10 @@ fn char_name_abbreviations(c: char) -> Option<String> {
 
 fn char_age(c: char) -> String {
     if let Some(unicode_version) = Age::of(c).map(|a| a.actual()) {
-        format!("{}.{}.{}", unicode_version.major, unicode_version.minor, unicode_version.micro)
+        format!(
+            "{}.{}.{}",
+            unicode_version.major, unicode_version.minor, unicode_version.micro
+        )
     } else {
         format!("<none>")
     }
