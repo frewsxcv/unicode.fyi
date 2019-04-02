@@ -1,7 +1,7 @@
 use std::io;
 use unic::segment::Graphemes;
 use unic::segment::Words;
-use unic::ucd::{name_aliases_of, GraphemeClusterBreak, Lowercase, Name, NameAliasType};
+use unic::ucd::{name_aliases_of, Age, GraphemeClusterBreak, Lowercase, Name, NameAliasType, Uppercase, WhiteSpace};
 // use wasm_bindgen::prelude::*;
 
 // #[wasm_bindgen]
@@ -11,7 +11,10 @@ struct CharInfo {
     display: String,
     name: String,
     is_lowercase: bool,
+    is_uppercase: bool,
+    is_white_space: bool,
     grapheme_cluster_break: String,
+    age: String,
 }
 
 impl CharInfo {
@@ -21,7 +24,10 @@ impl CharInfo {
             display: char_display(c),
             name: char_name(c),
             is_lowercase: Lowercase::of(c).as_bool(),
+            is_uppercase: Uppercase::of(c).as_bool(),
+            is_white_space: WhiteSpace::of(c).as_bool(),
             grapheme_cluster_break: format!("{:?}", GraphemeClusterBreak::of(c)),
+            age: char_age(c),
         }
     }
 }
@@ -60,4 +66,12 @@ fn char_name(c: char) -> String {
 
 fn char_name_abbreviations(c: char) -> Option<String> {
     name_aliases_of(c, NameAliasType::NameAbbreviations).map(|abbrs| abbrs[0].to_owned())
+}
+
+fn char_age(c: char) -> String {
+    if let Some(unicode_version) = Age::of(c).map(|a| a.actual()) {
+        format!("{}.{}.{}", unicode_version.major, unicode_version.minor, unicode_version.micro)
+    } else {
+        format!("<none>")
+    }
 }
