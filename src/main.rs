@@ -7,29 +7,29 @@ use unic::ucd::{name_aliases_of, Age, Alphabetic, GraphemeClusterBreak, Lowercas
 // #[wasm_bindgen]
 #[derive(Debug)]
 struct CharInfo {
+    age: String,
     char: char,
     display: String,
-    name: String,
+    grapheme_cluster_break: String,
     is_alphabetic: bool,
     is_lowercase: bool,
     is_uppercase: bool,
     is_white_space: bool,
-    grapheme_cluster_break: String,
-    age: String,
+    name: String,
 }
 
 impl CharInfo {
     fn from_char(c: char) -> Self {
         CharInfo {
+            age: char_age(c),
             char: c,
             display: char_display(c),
-            name: char_name(c),
+            grapheme_cluster_break: format!("{:?}", GraphemeClusterBreak::of(c)),
+            is_alphabetic: Alphabetic::of(c).as_bool(),
             is_lowercase: Lowercase::of(c).as_bool(),
             is_uppercase: Uppercase::of(c).as_bool(),
             is_white_space: WhiteSpace::of(c).as_bool(),
-            grapheme_cluster_break: format!("{:?}", GraphemeClusterBreak::of(c)),
-            age: char_age(c),
-            is_alphabetic: Alphabetic::of(c).as_bool(),
+            name: char_name(c),
         }
     }
 }
