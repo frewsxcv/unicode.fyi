@@ -2,9 +2,9 @@ use std::io;
 use unic::segment::Graphemes;
 use unic::segment::Words;
 use unic::ucd::{name_aliases_of, GraphemeClusterBreak, Lowercase, Name, NameAliasType};
-use wasm_bindgen::prelude::*;
+// use wasm_bindgen::prelude::*;
 
-#[wasm_bindgen]
+// #[wasm_bindgen]
 #[derive(Debug)]
 struct CharInfo {
     char: char,
