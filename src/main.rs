@@ -55,8 +55,10 @@ fn char_display(c: char) -> String {
 fn char_name(c: char) -> String {
     Name::of(c)
         .map(|n| n.to_string())
-        .or_else(|| {
-            name_aliases_of(c, NameAliasType::NameAbbreviations).map(|abbrs| abbrs[0].to_owned())
-        })
+        .or_else(|| char_name_abbreviations(c))
         .unwrap_or_else(|| "<none>".to_owned())
+}
+
+fn char_name_abbreviations(c: char) -> Option<String> {
+    name_aliases_of(c, NameAliasType::NameAbbreviations).map(|abbrs| abbrs[0].to_owned())
 }
