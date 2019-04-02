@@ -27,7 +27,7 @@ impl CharInfo {
             age: char_age(c),
             char: c,
             display: char_display(c),
-            grapheme_cluster_break: format!("{:?}", GraphemeClusterBreak::of(c)),
+            grapheme_cluster_break: GraphemeClusterBreak::of(c).to_string(),
             is_alphabetic: Alphabetic::of(c).as_bool(),
             is_lowercase: Lowercase::of(c).as_bool(),
             is_uppercase: Uppercase::of(c).as_bool(),
