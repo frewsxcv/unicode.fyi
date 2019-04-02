@@ -1,5 +1,5 @@
 use unicode_segmentation::UnicodeSegmentation;
-use unic::ucd::{name_aliases_of, Name, NameAliasType};
+use unic::ucd::{name_aliases_of, Name, NameAliasType, Lowercase, GraphemeClusterBreak};
 use wasm_bindgen::prelude::*;
 use std::io;
 
@@ -9,6 +9,8 @@ struct CharInfo {
     char: char,
     display: String,
     name: String,
+    is_lowercase: bool,
+    grapheme_cluster_break: String,
 }
 
 impl CharInfo {
@@ -17,6 +19,8 @@ impl CharInfo {
             char: c,
             display: char_display(c),
             name: char_name(c),
+            is_lowercase: Lowercase::of(c).as_bool(),
+            grapheme_cluster_break: format!("{:?}", GraphemeClusterBreak::of(c)),
         }
     }
 }
