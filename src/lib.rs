@@ -19,11 +19,9 @@ static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 pub fn unicode_info(s: &str) -> JsValue {
     let mut ret = vec![];
     for word in Words::new(&s, |_| true) {
-        let mut a = vec![];
-        for gc in Graphemes::new(word) {
-            a.push(grapheme_cluster_to_char_infos(gc));
-        }
-        ret.push(a);
+        ret.push(
+            Graphemes::new(word).map(|gc| grapheme_cluster_to_char_infos(gc)).collect::<Vec<_>>()
+        );
     }
     JsValue::from_serde(&ret).unwrap()
 }
