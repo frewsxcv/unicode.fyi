@@ -49,16 +49,27 @@ class App extends React.Component<{}, AppState> {
             this.setState({ inputValue: value });
         };
 
+        const words = unicodeInfo(this.state.inputValue).map((word) => {
+            return (<WordComponent word={word} />);
+        });
+
         return (
             <>
                 <h1>Unicode FYI</h1>
                 <input type="text" id="input" onInput={onInput} />
                 <div style={ { display: 'flex' } }>
+                    {words}
                 </div>
             </>
         );
     }
 }
+
+const WordComponent = (props: { word: Word }) => {
+    return (
+        <div>{props.word.content}</div>
+    );
+};
 
 ReactDOM.render(
     <App />,
