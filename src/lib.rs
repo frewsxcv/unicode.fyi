@@ -20,10 +20,8 @@ pub fn unicode_info(s: &str) -> JsValue {
     let mut ret = vec![];
     for word in Words::new(&s, |_| true) {
         let mut a = vec![];
-        for grapheme_cluster in Graphemes::new(word) {
-            a.push(
-                grapheme_cluster.chars().map(CharInfo::from_char).collect::<Vec<_>>()
-            );
+        for gc in Graphemes::new(word) {
+            a.push(grapheme_cluster_to_char_infos(gc));
         }
         ret.push(a);
     }
@@ -60,6 +58,10 @@ impl CharInfo {
             name: char_name(c),
         }
     }
+}
+
+fn grapheme_cluster_to_char_infos(gc: &str) -> Vec<CharInfo> {
+    gc.chars().map(CharInfo::from_char).collect::<Vec<_>>()
 }
 
 fn char_display(c: char) -> String {
