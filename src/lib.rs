@@ -14,13 +14,11 @@ static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 #[wasm_bindgen]
 pub fn unicode_info(s: &str) -> JsValue {
     utils::set_panic_hook();
-    let mut words = vec![];
-    for word in unic_segment::Words::new(&s, |_| true) {
-        words.push(
-            Word::from_str(word)
-        );
-    }
-    JsValue::from_serde(&words).unwrap()
+    JsValue::from_serde(
+        &unic_segment::Words::new(&s, |_| true)
+            .map(|word_str| Word::from_str(word_str))
+            .collect::<Vec<_>>()
+    ).unwrap()
 }
 
 #[wasm_bindgen]
