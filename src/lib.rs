@@ -16,16 +16,6 @@ use wasm_bindgen::prelude::*;
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 #[wasm_bindgen]
-extern "C" {
-    fn alert(s: &str);
-}
-
-#[wasm_bindgen]
-pub fn greet() {
-    alert("Hello, unicode-fyi!");
-}
-
-#[wasm_bindgen]
 pub fn unicode_info(s: &str) -> JsValue {
     let mut ret = vec![];
     for word in Words::new(&s, |_| true) {
