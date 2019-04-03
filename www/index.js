@@ -1,4 +1,3 @@
 import * as wasm from "unicode-fyi";
 
-wasm.greet();
-debugger;
+console.info(wasm.unicode_info("Family! 👪"))
