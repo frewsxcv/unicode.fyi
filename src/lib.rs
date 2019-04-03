@@ -21,7 +21,8 @@ pub fn unicode_info(s: &str) -> JsValue {
     for word in Words::new(&s, |_| true) {
         words.push(
             Graphemes::new(word)
-                .map(|gc| grapheme_cluster_to_char_infos(gc)).collect::<Vec<_>>()
+                .map(|gc| grapheme_cluster_to_char_infos(gc))
+                .collect::<Vec<_>>(),
         );
     }
     JsValue::from_serde(&words).unwrap()
