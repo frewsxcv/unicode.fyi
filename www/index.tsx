@@ -4,21 +4,23 @@ import * as ReactDOM from "react-dom";
 
 console.info(wasm.unicode_info("Family! 👪"))
 
-const input = document.getElementById("input");
+const app = document.getElementById("app");
 
-const results = document.getElementById("results");
+export const App = () => {
+    const onInput = (evt: React.FormEvent<HTMLInputElement>) => {
+        const value = (evt.target as HTMLInputElement).value || "";
+        console.log(wasm.unicode_info(value));
+    };
 
-input.addEventListener("input", evt => {
-    const value = (evt.target as HTMLInputElement).value || "";
-    console.log(wasm.unicode_info(value));
-    console.log(Hello());
-});
-
-export const Hello = () => {
-    return (<h1>Hello!</h1>);
+    return (
+        <>
+            <h1>Unicode FYI</h1>
+            <input type="text" id="input" onInput={onInput} />
+        </>
+    );
 };
 
 ReactDOM.render(
-    <Hello />,
-    results
+    <App />,
+    app
 );
