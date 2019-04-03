@@ -36,7 +36,7 @@ impl Word {
         Word(
             Graphemes::new(word_str)
                 .map(|gc| GraphemeCluster::from_str(gc))
-                .collect::<Vec<_>>()
+                .collect()
         )
     }
 }
