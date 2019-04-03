@@ -8,15 +8,15 @@ const app = document.getElementById("app");
 
 interface Word {
     content: string;
-    words: GraphemeCluster[];
+    grapheme_clusters: GraphemeCluster[];
 }
 
 interface GraphemeCluster {
     content: string;
-    words: CodePoints[];
+    code_points: CodePoint[];
 }
 
-interface CodePoints {
+interface CodePoint {
     age: string;
     char: string;
     display: string;
@@ -49,15 +49,15 @@ class App extends React.Component<{}, AppState> {
             this.setState({ inputValue: value });
         };
 
-        const words = unicodeInfo(this.state.inputValue).map((word) => {
-            return (<WordComponent word={word} />);
+        const words = unicodeInfo(this.state.inputValue).map((word, idx) => {
+            return (<WordComponent word={word} key={idx} />);
         });
 
         return (
             <>
                 <h1>Unicode FYI</h1>
                 <input type="text" id="input" onInput={onInput} />
-                <div style={ { display: 'flex' } }>
+                <div className="flex">
                     {words}
                 </div>
             </>
@@ -66,8 +66,40 @@ class App extends React.Component<{}, AppState> {
 }
 
 const WordComponent = (props: { word: Word }) => {
+    const graphemeClusterComponents = props.word.grapheme_clusters.map((graphemeCluster, idx) => {
+        return (<GraphemeClusterComponent graphemeCluster={graphemeCluster} key={idx} />);
+    });
+
     return (
-        <div>{props.word.content}</div>
+        <div className="outline pa3 mr2">
+            <div>{props.word.content}</div>
+            <div className="flex">
+                {graphemeClusterComponents}
+            </div>
+        </div>
+    );
+};
+
+const GraphemeClusterComponent = (props: { graphemeCluster: GraphemeCluster }) => {
+    const codePointComponents = props.graphemeCluster.code_points.map((codePoint, idx) => {
+        return (<CodePointComponent codePoint={codePoint} key={idx} />);
+    });
+
+    return (
+        <div className="outline pa3 mr2">
+            <div>{props.graphemeCluster.content}</div>
+            <div className="flex">
+                {codePointComponents}
+            </div>
+        </div>
+    );
+};
+
+const CodePointComponent = (props: { codePoint: CodePoint }) => {
+    return (
+        <div className="outline pa3 mr2">
+            <div>{props.codePoint.display}</div>
+        </div>
     );
 };
 

@@ -25,14 +25,14 @@ pub fn unicode_info(s: &str) -> JsValue {
 #[derive(Debug, Serialize)]
 pub struct Word {
     content: String,
-    words: Vec<GraphemeCluster>
+    grapheme_clusters: Vec<GraphemeCluster>
 }
 
 impl Word {
     fn from_str(word_str: &str) -> Self {
         Word {
             content: word_str.to_string(),
-            words: unic_segment::Graphemes::new(word_str)
+            grapheme_clusters: unic_segment::Graphemes::new(word_str)
                 .map(|gc| GraphemeCluster::from_str(gc))
                 .collect()
         }
