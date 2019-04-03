@@ -21,11 +21,9 @@ pub fn unicode_info(s: &str) -> JsValue {
     for word in Words::new(&s, |_| true) {
         let mut a = vec![];
         for grapheme_cluster in Graphemes::new(word) {
-            let mut b = vec![];
-            for char_info in grapheme_cluster.chars().map(CharInfo::from_char) {
-                b.push(char_info);
-            }
-            a.push(b);
+            a.push(
+                grapheme_cluster.chars().map(CharInfo::from_char).collect::<Vec<_>>()
+            );
         }
         ret.push(a);
     }
