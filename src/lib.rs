@@ -25,11 +25,11 @@ pub fn unicode_info(s: &str) -> JsValue {
             for char_info in grapheme_cluster.chars().map(CharInfo::from_char) {
                 b.push(char_info);
             }
-            a.push(b.into_boxed_slice());
+            a.push(b);
         }
-        ret.push(a.into_boxed_slice());
+        ret.push(a);
     }
-    JsValue::from_serde(&ret.into_boxed_slice()).unwrap()
+    JsValue::from_serde(&ret).unwrap()
 }
 
 #[wasm_bindgen]
