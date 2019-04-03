@@ -23,27 +23,35 @@ pub fn unicode_info(s: &str) -> JsValue {
 
 #[wasm_bindgen]
 #[derive(Debug, Serialize)]
-pub struct Word(Vec<GraphemeCluster>);
+pub struct Word {
+    content: String,
+    words: Vec<GraphemeCluster>
+}
 
 impl Word {
     fn from_str(word_str: &str) -> Self {
-        Word(
-            unic_segment::Graphemes::new(word_str)
+        Word {
+            content: word_str.to_string(),
+            words: unic_segment::Graphemes::new(word_str)
                 .map(|gc| GraphemeCluster::from_str(gc))
                 .collect()
-        )
+        }
     }
 }
 
 #[wasm_bindgen]
 #[derive(Debug, Serialize)]
-pub struct GraphemeCluster(Vec<CodePoint>);
+pub struct GraphemeCluster {
+    content: String,
+    code_points: Vec<CodePoint>,
+}
 
 impl GraphemeCluster {
     fn from_str(s: &str) -> Self {
-        Self(
-            s.chars().map(CodePoint::from_char).collect()
-        )
+        Self {
+            content: s.to_owned(),
+            code_points: s.chars().map(CodePoint::from_char).collect()
+        }
     }
 }
 
