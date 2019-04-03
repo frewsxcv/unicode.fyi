@@ -1,12 +1,8 @@
 mod utils;
 
 use serde::Serialize;
-use unic::segment::Graphemes;
-use unic::segment::Words;
-use unic::ucd::{
-    name_aliases_of, Age, Alphabetic, GeneralCategory, GraphemeClusterBreak, Lowercase, Name,
-    NameAliasType, Uppercase, WhiteSpace,
-};
+use unic::segment as unic_segment;
+use unic::ucd as unic_ucd;
 use wasm_bindgen::prelude::*;
 
 // When the `wee_alloc` feature is enabled, use `wee_alloc` as the global
@@ -19,7 +15,7 @@ static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 pub fn unicode_info(s: &str) -> JsValue {
     utils::set_panic_hook();
     let mut words = vec![];
-    for word in Words::new(&s, |_| true) {
+    for word in unic_segment::Words::new(&s, |_| true) {
         words.push(
             Word::from_str(word)
         );
@@ -34,7 +30,7 @@ pub struct Word(Vec<GraphemeCluster>);
 impl Word {
     fn from_str(word_str: &str) -> Self {
         Word(
-            Graphemes::new(word_str)
+            unic_segment::Graphemes::new(word_str)
                 .map(|gc| GraphemeCluster::from_str(gc))
                 .collect()
         )
@@ -74,12 +70,12 @@ impl CharInfo {
             age: char_age(c),
             char: c,
             display: char_display(c),
-            general_category: GeneralCategory::of(c).to_string(),
-            grapheme_cluster_break: GraphemeClusterBreak::of(c).to_string(),
-            is_alphabetic: Alphabetic::of(c).as_bool(),
-            is_lowercase: Lowercase::of(c).as_bool(),
-            is_uppercase: Uppercase::of(c).as_bool(),
-            is_white_space: WhiteSpace::of(c).as_bool(),
+            general_category: unic_ucd::GeneralCategory::of(c).to_string(),
+            grapheme_cluster_break: unic_ucd::GraphemeClusterBreak::of(c).to_string(),
+            is_alphabetic: unic_ucd::Alphabetic::of(c).as_bool(),
+            is_lowercase: unic_ucd::Lowercase::of(c).as_bool(),
+            is_uppercase: unic_ucd::Uppercase::of(c).as_bool(),
+            is_white_space: unic_ucd::WhiteSpace::of(c).as_bool(),
             name: char_name(c),
         }
     }
@@ -94,18 +90,18 @@ fn char_display(c: char) -> String {
 }
 
 fn char_name(c: char) -> String {
-    Name::of(c)
+    unic_ucd::Name::of(c)
         .map(|n| n.to_string())
         .or_else(|| char_name_abbreviations(c))
         .unwrap_or_else(|| "<none>".to_owned())
 }
 
 fn char_name_abbreviations(c: char) -> Option<String> {
-    name_aliases_of(c, NameAliasType::NameAbbreviations).map(|abbrs| abbrs[0].to_owned())
+    unic_ucd::name_aliases_of(c, unic_ucd::NameAliasType::NameAbbreviations).map(|abbrs| abbrs[0].to_owned())
 }
 
 fn char_age(c: char) -> String {
-    if let Some(unicode_version) = Age::of(c).map(|a| a.actual()) {
+    if let Some(unicode_version) = unic_ucd::Age::of(c).map(|a| a.actual()) {
         format!(
             "{}.{}.{}",
             unicode_version.major, unicode_version.minor, unicode_version.micro
