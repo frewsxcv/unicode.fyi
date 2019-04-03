@@ -37,19 +37,19 @@ impl Word {
 
 #[wasm_bindgen]
 #[derive(Debug, Serialize)]
-pub struct GraphemeCluster(Vec<CharInfo>);
+pub struct GraphemeCluster(Vec<CodePoint>);
 
 impl GraphemeCluster {
     fn from_str(s: &str) -> Self {
         Self(
-            s.chars().map(CharInfo::from_char).collect()
+            s.chars().map(CodePoint::from_char).collect()
         )
     }
 }
 
 #[wasm_bindgen]
 #[derive(Debug, Serialize)]
-pub struct CharInfo {
+pub struct CodePoint {
     age: String,
     char: char,
     display: String,
@@ -62,9 +62,9 @@ pub struct CharInfo {
     name: String,
 }
 
-impl CharInfo {
+impl CodePoint {
     fn from_char(c: char) -> Self {
-        CharInfo {
+        CodePoint {
             age: char_age(c),
             char: c,
             display: char_display(c),
