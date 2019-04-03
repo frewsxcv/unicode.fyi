@@ -33,11 +33,20 @@ const unicodeInfo = (s: string): Word[] => {
     return wasm.unicode_info(s) as Word[];
 };
 
-class App extends React.Component {
+interface AppState {
+    inputValue: string;
+}
+
+class App extends React.Component<{}, AppState> {
+    constructor(props: {}) {
+        super(props);
+        this.state = { inputValue: '' };
+    }
+
     render() {
         const onInput = (evt: React.FormEvent<HTMLInputElement>) => {
             const value = (evt.target as HTMLInputElement).value || "";
-            console.log(unicodeInfo(value));
+            this.setState({ inputValue: value });
         };
 
         return (
