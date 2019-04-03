@@ -1,15 +1,50 @@
-use std::io;
+mod utils;
+
+use serde::Serialize;
 use unic::segment::Graphemes;
 use unic::segment::Words;
 use unic::ucd::{
     name_aliases_of, Age, Alphabetic, GeneralCategory, GraphemeClusterBreak, Lowercase, Name,
     NameAliasType, Uppercase, WhiteSpace,
 };
-// use wasm_bindgen::prelude::*;
+use wasm_bindgen::prelude::*;
 
-// #[wasm_bindgen]
-#[derive(Debug)]
-struct CharInfo {
+// When the `wee_alloc` feature is enabled, use `wee_alloc` as the global
+// allocator.
+#[cfg(feature = "wee_alloc")]
+#[global_allocator]
+static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
+
+#[wasm_bindgen]
+extern "C" {
+    fn alert(s: &str);
+}
+
+#[wasm_bindgen]
+pub fn greet() {
+    alert("Hello, unicode-fyi!");
+}
+
+#[wasm_bindgen]
+pub fn unicode_info(s: &str) -> JsValue {
+    let mut ret = vec![];
+    for word in Words::new(&s, |_| true) {
+        let mut a = vec![];
+        for grapheme_cluster in Graphemes::new(word) {
+            let mut b = vec![];
+            for char_info in grapheme_cluster.chars().map(CharInfo::from_char) {
+                b.push(char_info);
+            }
+            a.push(b.into_boxed_slice());
+        }
+        ret.push(a.into_boxed_slice());
+    }
+    JsValue::from_serde(&ret.into_boxed_slice()).unwrap()
+}
+
+#[wasm_bindgen]
+#[derive(Debug, Serialize)]
+pub struct CharInfo {
     age: String,
     char: char,
     display: String,
@@ -37,23 +72,6 @@ impl CharInfo {
             name: char_name(c),
         }
     }
-}
-
-fn main() -> io::Result<()> {
-    let mut buffer = String::new();
-    io::stdin().read_line(&mut buffer)?;
-
-    for word in Words::new(&buffer, |_| true) {
-        println!("word");
-        for grapheme_cluster in Graphemes::new(word) {
-            println!("\tcluster");
-            for char_info in grapheme_cluster.chars().map(CharInfo::from_char) {
-                println!("\t\t{:?}", char_info);
-            }
-        }
-    }
-
-    Ok(())
 }
 
 fn char_display(c: char) -> String {

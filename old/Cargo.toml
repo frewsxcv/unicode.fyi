@@ -1,9 +1,0 @@
-[package]
-name = "unicode-describe"
-version = "0.1.0"
-authors = ["Corey Farwell <coreyf@rwell.org>"]
-edition = "2018"
-
-[dependencies]
-unic = "0.9.0"
-wasm-bindgen = "0.2"
