@@ -22,11 +22,23 @@ pub fn unicode_info(s: &str) -> JsValue {
     for word in Words::new(&s, |_| true) {
         words.push(
             Graphemes::new(word)
-                .map(|gc| grapheme_cluster_to_char_infos(gc))
+                .map(|gc| GraphemeCluster::from_str(gc))
                 .collect::<Vec<_>>(),
         );
     }
     JsValue::from_serde(&words).unwrap()
+}
+
+#[wasm_bindgen]
+#[derive(Debug, Serialize)]
+pub struct GraphemeCluster(Vec<CharInfo>);
+
+impl GraphemeCluster {
+    fn from_str(s: &str) -> Self {
+        Self(
+            s.chars().map(CharInfo::from_char).collect::<Vec<_>>()
+        )
+    }
 }
 
 #[wasm_bindgen]
@@ -59,10 +71,6 @@ impl CharInfo {
             name: char_name(c),
         }
     }
-}
-
-fn grapheme_cluster_to_char_infos(gc: &str) -> Vec<CharInfo> {
-    gc.chars().map(CharInfo::from_char).collect::<Vec<_>>()
 }
 
 fn char_display(c: char) -> String {
