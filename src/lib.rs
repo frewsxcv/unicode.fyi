@@ -17,6 +17,7 @@ static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 #[wasm_bindgen]
 pub fn unicode_info(s: &str) -> JsValue {
+    utils::set_panic_hook();
     let mut words = vec![];
     for word in Words::new(&s, |_| true) {
         words.push(
