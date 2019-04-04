@@ -38,12 +38,15 @@ interface AppState {
 class App extends React.Component<{}, AppState> {
     constructor(props: {}) {
         super(props);
-        this.state = { inputValue: 'g̈Family! 👨‍👨‍👧‍👧' };
+        this.state = {
+            inputValue: new URL(window.location.toString()).searchParams.get('q') || 'g̈Family! 👨‍👨‍👧‍👧'
+        };
     }
 
     render() {
         const onInput = (evt: React.FormEvent<HTMLInputElement>) => {
             const value = (evt.target as HTMLInputElement).value || "";
+            window.history.replaceState({}, '', '?q=' + encodeURIComponent(value));
             this.setState({ inputValue: value });
         };
 
