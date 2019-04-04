@@ -82,7 +82,7 @@ const WordComponent = (props: { word: Word }) => {
 
   return (
     <div>
-      <div className="pa2 mr2 mb2 bg-light-gray">
+      <div className="pa2 mr2 mb2 bg-yellow">
         <div>{props.word.content}</div>
       </div>
       <div className="flex">{graphemeClusterComponents}</div>
@@ -101,7 +101,7 @@ const GraphemeClusterComponent = (props: {
 
   return (
     <div>
-      <div className="pa2 mr2 mb2 bg-light-gray">
+      <div className="pa2 mr2 mb2 bg-yellow">
         <div>{props.graphemeCluster.content}</div>
       </div>
       <div className="flex">{codePointComponents}</div>
