@@ -39,17 +39,15 @@ class App extends React.Component<{}, AppState> {
   constructor(props: {}) {
     super(props);
     this.state = {
-      inputValue:
-        new URL(window.location.toString()).searchParams.get("q") ||
-        "g̈Family! 👨‍👨‍👧‍👧"
+      inputValue: inputValueFromUrl() || "g̈Family! 👨‍👨‍👧‍👧"
     };
   }
 
   render() {
     const onInput = (evt: React.FormEvent<HTMLInputElement>) => {
-      const value = (evt.target as HTMLInputElement).value || "";
-      window.history.replaceState({}, "", "?q=" + encodeURIComponent(value));
-      this.setState({ inputValue: value });
+      const inputValue = (evt.target as HTMLInputElement).value || "";
+      setInputValueInUrl(inputValue);
+      this.setState({ inputValue });
     };
 
     const words = unicodeInfo(this.state.inputValue).map((word, idx) => {
@@ -119,6 +117,14 @@ const CodePointComponent = (props: { codePoint: CodePoint }) => {
       <div>{props.codePoint.name}</div>
     </div>
   );
+};
+
+const setInputValueInUrl = (inputValue: string) => {
+  window.history.replaceState({}, "", "?q=" + encodeURIComponent(inputValue));
+};
+
+const inputValueFromUrl = () => {
+  return new URL(window.location.toString()).searchParams.get("q");
 };
 
 ReactDOM.render(<App />, app);
