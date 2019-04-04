@@ -123,3 +123,13 @@ fn char_age(c: char) -> String {
 fn char_code(c: char) -> String {
     format!("U+{:04x}", c as u32).to_ascii_uppercase()
 }
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_char_code() {
+        assert_eq!(char_code('👨'), "U+1F468");
+    }
+}
