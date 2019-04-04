@@ -54,7 +54,7 @@ class App extends React.Component<{}, AppState> {
         return (
             <div className="sans-serif">
                 <h1>Unicode FYI</h1>
-                <input type="text" id="input" onInput={onInput} />
+                <input type="text" id="input" onInput={onInput} value={this.state.inputValue} />
                 <div className="flex">
                     {words}
                 </div>
