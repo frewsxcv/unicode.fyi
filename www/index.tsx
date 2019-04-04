@@ -98,7 +98,7 @@ const GraphemeClusterComponent = (props: { graphemeCluster: GraphemeCluster }) =
 
 const CodePointComponent = (props: { codePoint: CodePoint }) => {
     return (
-        <div className="pa3 mr2 bg-washed-yellow">
+        <div className="pa3 mr2 bg-washed-yellow nowrap">
             <div className="pa4 flex bb">
                 <span className="f1 b">{props.codePoint.display}</span>
                 <span className="self-end">U+0A32B</span>
