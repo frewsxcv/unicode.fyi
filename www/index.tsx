@@ -17,6 +17,7 @@ interface GraphemeCluster {
 interface CodePoint {
   age: string;
   char: string;
+  code: string;
   display: string;
   general_category: string;
   grapheme_cluster_break: string;
@@ -112,7 +113,7 @@ const CodePointComponent = (props: { codePoint: CodePoint }) => {
     <div className="pa3 mr2 bg-washed-yellow nowrap">
       <div className="pa4 flex bb">
         <span className="f1 b">{props.codePoint.display}</span>
-        <span className="self-end">U+0A32B</span>
+        <span className="self-end">{props.codePoint.code}</span>
       </div>
       <div>{props.codePoint.name}</div>
     </div>

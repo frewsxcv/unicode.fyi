@@ -60,6 +60,7 @@ impl GraphemeCluster {
 pub struct CodePoint {
     age: String,
     char: char,
+    code: String,
     display: String,
     general_category: String,
     grapheme_cluster_break: String,
@@ -75,6 +76,7 @@ impl CodePoint {
         CodePoint {
             age: char_age(c),
             char: c,
+            code: char_code(c),
             display: char_display(c),
             general_category: unic_ucd::GeneralCategory::of(c).to_string(),
             grapheme_cluster_break: unic_ucd::GraphemeClusterBreak::of(c).to_string(),
@@ -115,4 +117,9 @@ fn char_age(c: char) -> String {
     } else {
         format!("<none>")
     }
+}
+
+// 'c' -> "U+0063"
+fn char_code(c: char) -> String {
+    format!("U+{:04x}", c as u32).to_ascii_uppercase()
 }
