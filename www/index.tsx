@@ -63,7 +63,7 @@ class App extends React.Component<{}, AppState> {
           id="input"
           onInput={onInput}
           defaultValue={this.state.inputValue}
-          className="mb3"
+          className="mb3 bn pa2"
         />
         <div className="flex">{words}</div>
       </div>
@@ -111,11 +111,13 @@ const GraphemeClusterComponent = (props: {
 
 const CodePointComponent = (props: { codePoint: CodePoint }) => {
   return (
-    <div className="pa4 mr2 bg-blue washed-red nowrap tc">
-      <div className="f7 code">{props.codePoint.code}</div>
-      <div className="f7 code">{props.codePoint.general_category_abbr}</div>
+    <div className="pa3 mr2 bg-blue white nowrap tc">
+      <div className="flex">
+        <div className="f6 w-50 tl" style={ {fontFamily: "Roboto Condensed"} }>{props.codePoint.code}</div>
+        <div className="f6 w-50 tr" style={ {fontFamily: "Roboto Condensed"} }>{props.codePoint.general_category_abbr}</div>
+      </div>
       <div className="f1 pa3 b lh-copy">{props.codePoint.display}</div>
-      <div className="f7 ttc">{props.codePoint.name.toLowerCase()}</div>
+      <div className="f6 ttc" style={ {fontFamily: "Roboto Condensed"} }>{props.codePoint.name.toLowerCase()}</div>
     </div>
   );
 };
