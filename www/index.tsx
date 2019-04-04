@@ -81,7 +81,7 @@ const WordComponent = (props: { word: Word }) => {
 
   return (
     <div>
-      <div className="pa2 mr2 mb2 bg-washed-green">
+      <div className="pa2 mr2 mb2 bg-light-gray">
         <div>{props.word.content}</div>
       </div>
       <div className="flex">{graphemeClusterComponents}</div>
@@ -100,7 +100,7 @@ const GraphemeClusterComponent = (props: {
 
   return (
     <div>
-      <div className="pa2 mr2 mb2 bg-washed-green">
+      <div className="pa2 mr2 mb2 bg-light-gray">
         <div>{props.graphemeCluster.content}</div>
       </div>
       <div className="flex">{codePointComponents}</div>
@@ -110,7 +110,7 @@ const GraphemeClusterComponent = (props: {
 
 const CodePointComponent = (props: { codePoint: CodePoint }) => {
   return (
-    <div className="pa3 mr2 bg-washed-yellow nowrap tc">
+    <div className="pa4 mr2 bg-blue washed-red nowrap tc">
       <div className="f7 code">{props.codePoint.code}</div>
       <div className="f1 pa3 b">{props.codePoint.display}</div>
       <div className="f7 ttc">{props.codePoint.name.toLowerCase()}</div>
