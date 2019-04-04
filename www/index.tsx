@@ -2,8 +2,6 @@ import * as wasm from "unicode-fyi";
 import * as React from 'react';
 import * as ReactDOM from "react-dom";
 
-console.info(wasm.unicode_info("Family! 👪"))
-
 const app = document.getElementById("app");
 
 interface Word {
@@ -40,7 +38,7 @@ interface AppState {
 class App extends React.Component<{}, AppState> {
     constructor(props: {}) {
         super(props);
-        this.state = { inputValue: '' };
+        this.state = { inputValue: 'Family! 👪' };
     }
 
     render() {
