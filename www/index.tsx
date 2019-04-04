@@ -38,7 +38,7 @@ interface AppState {
 class App extends React.Component<{}, AppState> {
     constructor(props: {}) {
         super(props);
-        this.state = { inputValue: 'Family! 👪' };
+        this.state = { inputValue: 'Family! 👨‍👨‍👧‍👧' };
     }
 
     render() {
