@@ -1,6 +1,7 @@
 mod utils;
 
 use serde::Serialize;
+use unic::char::property::EnumeratedCharProperty;
 use unic::segment as unic_segment;
 use unic::ucd as unic_ucd;
 use wasm_bindgen::prelude::*;
@@ -63,6 +64,7 @@ pub struct CodePoint {
     code: String,
     display: String,
     general_category: String,
+    general_category_abbr: &'static str,
     grapheme_cluster_break: String,
     is_alphabetic: bool,
     is_lowercase: bool,
@@ -79,6 +81,7 @@ impl CodePoint {
             code: char_code(c),
             display: char_display(c),
             general_category: unic_ucd::GeneralCategory::of(c).to_string(),
+            general_category_abbr: unic_ucd::GeneralCategory::of(c).abbr_name(),
             grapheme_cluster_break: unic_ucd::GraphemeClusterBreak::of(c).to_string(),
             is_alphabetic: unic_ucd::Alphabetic::of(c).as_bool(),
             is_lowercase: unic_ucd::Lowercase::of(c).as_bool(),

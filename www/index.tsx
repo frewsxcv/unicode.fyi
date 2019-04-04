@@ -20,6 +20,7 @@ interface CodePoint {
   code: string;
   display: string;
   general_category: string;
+  general_category_abbr: string;
   grapheme_cluster_break: string;
   is_alphabetic: boolean;
   is_lowercase: boolean;
@@ -112,7 +113,8 @@ const CodePointComponent = (props: { codePoint: CodePoint }) => {
   return (
     <div className="pa4 mr2 bg-blue washed-red nowrap tc">
       <div className="f7 code">{props.codePoint.code}</div>
-      <div className="f1 pa3 b">{props.codePoint.display}</div>
+      <div className="f7 code">{props.codePoint.general_category_abbr}</div>
+      <div className="f1 pa3 b lh-copy">{props.codePoint.display}</div>
       <div className="f7 ttc">{props.codePoint.name.toLowerCase()}</div>
     </div>
   );
