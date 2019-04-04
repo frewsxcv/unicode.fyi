@@ -54,13 +54,13 @@ class App extends React.Component<{}, AppState> {
         });
 
         return (
-            <>
+            <div className="sans-serif">
                 <h1>Unicode FYI</h1>
                 <input type="text" id="input" onInput={onInput} />
                 <div className="flex">
                     {words}
                 </div>
-            </>
+            </div>
         );
     }
 }
