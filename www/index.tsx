@@ -1,119 +1,124 @@
 import * as wasm from "unicode-fyi";
-import * as React from 'react';
+import * as React from "react";
 import * as ReactDOM from "react-dom";
 
 const app = document.getElementById("app");
 
 interface Word {
-    content: string;
-    grapheme_clusters: GraphemeCluster[];
+  content: string;
+  grapheme_clusters: GraphemeCluster[];
 }
 
 interface GraphemeCluster {
-    content: string;
-    code_points: CodePoint[];
+  content: string;
+  code_points: CodePoint[];
 }
 
 interface CodePoint {
-    age: string;
-    char: string;
-    display: string;
-    general_category: string;
-    grapheme_cluster_break: string;
-    is_alphabetic: boolean;
-    is_lowercase: boolean;
-    is_uppercase: boolean;
-    is_white_space: boolean;
-    name: string;
+  age: string;
+  char: string;
+  display: string;
+  general_category: string;
+  grapheme_cluster_break: string;
+  is_alphabetic: boolean;
+  is_lowercase: boolean;
+  is_uppercase: boolean;
+  is_white_space: boolean;
+  name: string;
 }
 
 const unicodeInfo = (s: string): Word[] => {
-    return wasm.unicode_info(s) as Word[];
+  return wasm.unicode_info(s) as Word[];
 };
 
 interface AppState {
-    inputValue: string;
+  inputValue: string;
 }
 
 class App extends React.Component<{}, AppState> {
-    constructor(props: {}) {
-        super(props);
-        this.state = {
-            inputValue: new URL(window.location.toString()).searchParams.get('q') || 'g̈Family! 👨‍👨‍👧‍👧'
-        };
-    }
+  constructor(props: {}) {
+    super(props);
+    this.state = {
+      inputValue:
+        new URL(window.location.toString()).searchParams.get("q") ||
+        "g̈Family! 👨‍👨‍👧‍👧"
+    };
+  }
 
-    render() {
-        const onInput = (evt: React.FormEvent<HTMLInputElement>) => {
-            const value = (evt.target as HTMLInputElement).value || "";
-            window.history.replaceState({}, '', '?q=' + encodeURIComponent(value));
-            this.setState({ inputValue: value });
-        };
+  render() {
+    const onInput = (evt: React.FormEvent<HTMLInputElement>) => {
+      const value = (evt.target as HTMLInputElement).value || "";
+      window.history.replaceState({}, "", "?q=" + encodeURIComponent(value));
+      this.setState({ inputValue: value });
+    };
 
-        const words = unicodeInfo(this.state.inputValue).map((word, idx) => {
-            return (<WordComponent word={word} key={idx} />);
-        });
+    const words = unicodeInfo(this.state.inputValue).map((word, idx) => {
+      return <WordComponent word={word} key={idx} />;
+    });
 
-        return (
-            <div className="sans-serif ma4">
-                <input type="text" id="input" onInput={onInput} defaultValue={this.state.inputValue} className="mb3" />
-                <div className="flex">
-                    {words}
-                </div>
-            </div>
-        );
-    }
+    return (
+      <div className="sans-serif ma4">
+        <input
+          type="text"
+          id="input"
+          onInput={onInput}
+          defaultValue={this.state.inputValue}
+          className="mb3"
+        />
+        <div className="flex">{words}</div>
+      </div>
+    );
+  }
 }
 
 const WordComponent = (props: { word: Word }) => {
-    const graphemeClusterComponents = props.word.grapheme_clusters.map((graphemeCluster, idx) => {
-        return (<GraphemeClusterComponent graphemeCluster={graphemeCluster} key={idx} />);
-    });
+  const graphemeClusterComponents = props.word.grapheme_clusters.map(
+    (graphemeCluster, idx) => {
+      return (
+        <GraphemeClusterComponent graphemeCluster={graphemeCluster} key={idx} />
+      );
+    }
+  );
 
-    return (
-        <div>
-            <div className="pa2 mr2 mb2 bg-washed-green">
-                <div>{props.word.content}</div>
-            </div>
-            <div className="flex">
-                {graphemeClusterComponents}
-            </div>
-        </div>
-    );
+  return (
+    <div>
+      <div className="pa2 mr2 mb2 bg-washed-green">
+        <div>{props.word.content}</div>
+      </div>
+      <div className="flex">{graphemeClusterComponents}</div>
+    </div>
+  );
 };
 
-const GraphemeClusterComponent = (props: { graphemeCluster: GraphemeCluster }) => {
-    const codePointComponents = props.graphemeCluster.code_points.map((codePoint, idx) => {
-        return (<CodePointComponent codePoint={codePoint} key={idx} />);
-    });
+const GraphemeClusterComponent = (props: {
+  graphemeCluster: GraphemeCluster;
+}) => {
+  const codePointComponents = props.graphemeCluster.code_points.map(
+    (codePoint, idx) => {
+      return <CodePointComponent codePoint={codePoint} key={idx} />;
+    }
+  );
 
-    return (
-        <div>
-            <div className="pa2 mr2 mb2 bg-washed-green">
-                <div>{props.graphemeCluster.content}</div>
-            </div>
-            <div className="flex">
-                {codePointComponents}
-            </div>
-        </div>
-    );
+  return (
+    <div>
+      <div className="pa2 mr2 mb2 bg-washed-green">
+        <div>{props.graphemeCluster.content}</div>
+      </div>
+      <div className="flex">{codePointComponents}</div>
+    </div>
+  );
 };
 
 const CodePointComponent = (props: { codePoint: CodePoint }) => {
-    return (
-        <div className="pa3 mr2 bg-washed-yellow nowrap">
-            <div className="pa4 flex bb">
-                <span className="f1 b">{props.codePoint.display}</span>
-                <span className="self-end">U+0A32B</span>
-            </div>
-            <div>
-                {props.codePoint.name}
-            </div>
-        </div>
-    );
+  return (
+    <div className="pa3 mr2 bg-washed-yellow nowrap">
+      <div className="pa4 flex bb">
+        <span className="f1 b">{props.codePoint.display}</span>
+        <span className="self-end">U+0A32B</span>
+      </div>
+      <div>{props.codePoint.name}</div>
+    </div>
+  );
 };
 
-ReactDOM.render(
-    <App />,
-    app
-);
+ReactDOM.render(<App />, app);
