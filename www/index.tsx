@@ -59,15 +59,25 @@ class App extends React.Component<{}, AppState> {
 
     return (
       <div className="ma4">
-        <InputComponent
-          onInput={onInput}
-          defaultValue={this.state.inputValue}
-        />
+        <TopBarComponent>
+          <InputComponent
+            onInput={onInput}
+            defaultValue={this.state.inputValue}
+          />
+        </TopBarComponent>
         <div className="flex">{words}</div>
       </div>
     );
   }
 }
+
+const TopBarComponent = (props: { children: React.ReactNode }) => {
+  return (
+    <div className="w-100 p2 bg-green">
+      {props.children}
+    </div>
+  );
+};
 
 const InputComponent = (props: {
   defaultValue: string;
@@ -79,7 +89,7 @@ const InputComponent = (props: {
       id="input"
       onInput={evt => props.onInput(evt.currentTarget.value)}
       defaultValue={props.defaultValue}
-      className="mb3 bn pa2"
+      className="ma3 bn pa2"
     />
   );
 };
@@ -95,7 +105,7 @@ const WordComponent = (props: { word: Word }) => {
 
   return (
     <div>
-      <div className="pa2 mr2 mb2 bg-yellow">
+      <div className="pa2 mr2 mt2 bg-yellow">
         <div>{props.word.content}</div>
       </div>
       <div className="flex">{graphemeClusterComponents}</div>
@@ -114,7 +124,7 @@ const GraphemeClusterComponent = (props: {
 
   return (
     <div>
-      <div className="pa2 mr2 mb2 bg-yellow">
+      <div className="pa2 mr2 mt2 bg-yellow">
         <div>{props.graphemeCluster.content}</div>
       </div>
       <div className="flex">{codePointComponents}</div>
@@ -125,7 +135,7 @@ const GraphemeClusterComponent = (props: {
 const CodePointComponent = (props: { codePoint: CodePoint }) => {
   return (
     <div
-      className="pa3 mr2 bg-blue white nowrap tc flex flex-column"
+      className="pa3 mr2 mt2 bg-blue white nowrap tc flex flex-column"
       style={{ height: "10rem" }}
     >
       <div className="flex">
