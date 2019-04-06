@@ -47,8 +47,7 @@ class App extends React.Component<{}, AppState> {
   }
 
   render() {
-    const onInput = (evt: React.FormEvent<HTMLInputElement>) => {
-      const inputValue = (evt.target as HTMLInputElement).value || "";
+    const onInput = (inputValue: string) => {
       setInputValueInUrl(inputValue);
       setInputValueInTitle(inputValue);
       this.setState({ inputValue });
@@ -60,18 +59,32 @@ class App extends React.Component<{}, AppState> {
 
     return (
       <div className="ma4">
-        <input
-          type="text"
-          id="input"
+        <InputComponent
           onInput={onInput}
           defaultValue={this.state.inputValue}
-          className="mb3 bn pa2"
         />
         <div className="flex">{words}</div>
       </div>
     );
   }
 }
+
+const InputComponent = (props: {
+  defaultValue: string;
+  onInput(inputValue: string): void;
+}) => {
+  return (
+    <input
+      type="text"
+      id="input"
+      onInput={evt =>
+        props.onInput((evt.target as HTMLInputElement).value || "")
+      }
+      defaultValue={props.defaultValue}
+      className="mb3 bn pa2"
+    />
+  );
+};
 
 const WordComponent = (props: { word: Word }) => {
   const graphemeClusterComponents = props.word.grapheme_clusters.map(
