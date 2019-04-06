@@ -157,7 +157,8 @@ fn char_category_color(c: char) -> String {
         MathSymbol |
         CurrencySymbol |
         ModifierSymbol |
-        OtherSymbol |
+        OtherSymbol => "purple".to_string(),
+
         SpaceSeparator |
         LineSeparator => "pink".to_string(),
 
