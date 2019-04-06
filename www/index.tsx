@@ -81,8 +81,7 @@ const InputComponent = (props: {
   onInput(inputValue: string): void;
 }) => {
   return (
-    <input
-      type="text"
+    <textarea
       id="input"
       onInput={evt => props.onInput(evt.currentTarget.value)}
       defaultValue={props.defaultValue}
