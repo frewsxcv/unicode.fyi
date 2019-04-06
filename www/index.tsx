@@ -72,7 +72,7 @@ class App extends React.Component<{}, AppState> {
 }
 
 const TopBarComponent = (props: { children: React.ReactNode }) => {
-  return <div className="w-100 p2 bg-green">{props.children}</div>;
+  return <div className="w-100 p2 bg-green flex">{props.children}</div>;
 };
 
 const InputComponent = (props: {
@@ -85,7 +85,7 @@ const InputComponent = (props: {
       id="input"
       onInput={evt => props.onInput(evt.currentTarget.value)}
       defaultValue={props.defaultValue}
-      className="ma3 bn pa2"
+      className="ma3 bn pa2 flex-auto"
     />
   );
 };
