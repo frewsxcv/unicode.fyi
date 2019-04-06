@@ -72,11 +72,7 @@ class App extends React.Component<{}, AppState> {
 }
 
 const TopBarComponent = (props: { children: React.ReactNode }) => {
-  return (
-    <div className="w-100 p2 bg-green">
-      {props.children}
-    </div>
-  );
+  return <div className="w-100 p2 bg-green">{props.children}</div>;
 };
 
 const InputComponent = (props: {
