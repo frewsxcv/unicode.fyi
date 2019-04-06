@@ -82,7 +82,6 @@ const InputComponent = (props: {
 }) => {
   return (
     <textarea
-      id="input"
       onInput={evt => props.onInput(evt.currentTarget.value)}
       defaultValue={props.defaultValue}
       className="ma3 bn pa2 flex-auto"
