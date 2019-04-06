@@ -131,7 +131,10 @@ const CodePointComponent = (props: { codePoint: CodePoint }) => {
   return (
     <div
       className="pa3 mt2 ml2 white nowrap tc flex flex-column"
-      style={{ height: "10rem", backgroundColor: props.codePoint.category_color }}
+      style={{
+        height: "10rem",
+        backgroundColor: props.codePoint.category_color
+      }}
     >
       <div className="flex">
         <div className="f6 w-50 tl font-family-condensed">
