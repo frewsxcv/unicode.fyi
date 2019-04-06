@@ -138,7 +138,7 @@ const CodePointComponent = (props: { codePoint: CodePoint }) => {
         <div className="f6 w-50 tl font-family-condensed">
           {props.codePoint.code}
         </div>
-        <div className="f6 w-50 tr font-family-condensed">
+        <div className="f6 w-50 tr font-family-condensed ml3">
           {props.codePoint.general_category_abbr}
         </div>
       </div>
