@@ -60,7 +60,7 @@ impl GraphemeCluster {
 #[derive(Debug, Serialize)]
 pub struct CodePoint {
     age: String,
-    category_color: String,
+    category_color: &'static str,
     char: char,
     code: String,
     display: String,
@@ -128,7 +128,7 @@ fn char_category(c: char) -> unic_ucd::GeneralCategory {
     unic_ucd::GeneralCategory::of(c)
 }
 
-fn char_category_color(c: char) -> String {
+fn char_category_color(c: char) -> &'static str {
     use unic_ucd::GeneralCategory::*;
 
     match char_category(c) {
@@ -136,15 +136,15 @@ fn char_category_color(c: char) -> String {
         LowercaseLetter |
         TitlecaseLetter |
         ModifierLetter |
-        OtherLetter => "green".to_string(),
+        OtherLetter => "green",
 
         NonspacingMark |
         SpacingMark |
-        EnclosingMark => "red".to_string(),
+        EnclosingMark => "red",
 
         DecimalNumber |
         LetterNumber |
-        OtherNumber => "blue".to_string(),
+        OtherNumber => "blue",
 
         ConnectorPunctuation |
         DashPunctuation |
@@ -152,23 +152,23 @@ fn char_category_color(c: char) -> String {
         ClosePunctuation |
         InitialPunctuation |
         FinalPunctuation |
-        OtherPunctuation => "orange".to_string(),
+        OtherPunctuation => "orange",
 
         MathSymbol |
         CurrencySymbol |
         ModifierSymbol |
-        OtherSymbol => "purple".to_string(),
+        OtherSymbol => "purple",
 
         SpaceSeparator |
-        LineSeparator => "pink".to_string(),
+        LineSeparator => "pink",
 
         // TODO: should these all be grouped?
-        ParagraphSeparator => "green".to_string(),
-        Control => "grey".to_string(),
-        Format => "grey".to_string(),
-        Surrogate => "grey".to_string(),
-        PrivateUse => "grey".to_string(),
-        Unassigned => "grey".to_string(),
+        ParagraphSeparator => "green",
+        Control => "grey",
+        Format => "grey",
+        Surrogate => "grey",
+        PrivateUse => "grey",
+        Unassigned => "grey",
     }
 }
 
