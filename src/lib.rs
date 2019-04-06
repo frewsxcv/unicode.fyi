@@ -60,6 +60,7 @@ impl GraphemeCluster {
 #[derive(Debug, Serialize)]
 pub struct CodePoint {
     age: String,
+    category_color: String,
     char: char,
     code: String,
     display: String,
@@ -77,11 +78,12 @@ impl CodePoint {
     fn from_char(c: char) -> Self {
         CodePoint {
             age: char_age(c),
+            category_color: char_category_color(c),
             char: c,
             code: char_code(c),
             display: char_display(c),
-            general_category: unic_ucd::GeneralCategory::of(c).to_string(),
-            general_category_abbr: unic_ucd::GeneralCategory::of(c).abbr_name(),
+            general_category: char_category(c).to_string(),
+            general_category_abbr: char_category(c).abbr_name(),
             grapheme_cluster_break: unic_ucd::GraphemeClusterBreak::of(c).to_string(),
             is_alphabetic: unic_ucd::Alphabetic::of(c).as_bool(),
             is_lowercase: unic_ucd::Lowercase::of(c).as_bool(),
@@ -119,6 +121,53 @@ fn char_age(c: char) -> String {
         )
     } else {
         format!("<none>")
+    }
+}
+
+fn char_category(c: char) -> unic_ucd::GeneralCategory {
+    unic_ucd::GeneralCategory::of(c)
+}
+
+fn char_category_color(c: char) -> String {
+    use unic_ucd::GeneralCategory::*;
+
+    match char_category(c) {
+        UppercaseLetter |
+        LowercaseLetter |
+        TitlecaseLetter |
+        ModifierLetter |
+        OtherLetter => "green".to_string(),
+
+        NonspacingMark |
+        SpacingMark |
+        EnclosingMark => "red".to_string(),
+
+        DecimalNumber |
+        LetterNumber |
+        OtherNumber => "blue".to_string(),
+
+        ConnectorPunctuation |
+        DashPunctuation |
+        OpenPunctuation |
+        ClosePunctuation |
+        InitialPunctuation |
+        FinalPunctuation |
+        OtherPunctuation => "orange".to_string(),
+
+        MathSymbol |
+        CurrencySymbol |
+        ModifierSymbol |
+        OtherSymbol |
+        SpaceSeparator |
+        LineSeparator => "pink".to_string(),
+
+        // TODO: should these all be grouped?
+        ParagraphSeparator => "green".to_string(),
+        Control => "grey".to_string(),
+        Format => "grey".to_string(),
+        Surrogate => "grey".to_string(),
+        PrivateUse => "grey".to_string(),
+        Unassigned => "grey".to_string(),
     }
 }
 
