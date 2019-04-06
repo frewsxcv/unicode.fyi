@@ -59,7 +59,7 @@ class App extends React.Component<{}, AppState> {
     });
 
     return (
-      <div className="sans-serif ma4">
+      <div className="ma4">
         <input
           type="text"
           id="input"
@@ -113,15 +113,24 @@ const GraphemeClusterComponent = (props: {
 
 const CodePointComponent = (props: { codePoint: CodePoint }) => {
   return (
-    <div className="pa3 mr2 bg-blue white nowrap tc flex flex-column" style={ {height: "10rem"} }>
+    <div
+      className="pa3 mr2 bg-blue white nowrap tc flex flex-column"
+      style={{ height: "10rem" }}
+    >
       <div className="flex">
-        <div className="f6 w-50 tl" style={ {fontFamily: "Roboto Condensed"} }>{props.codePoint.code}</div>
-        <div className="f6 w-50 tr" style={ {fontFamily: "Roboto Condensed"} }>{props.codePoint.general_category_abbr}</div>
+        <div className="f6 w-50 tl font-family-condensed">
+          {props.codePoint.code}
+        </div>
+        <div className="f6 w-50 tr font-family-condensed">
+          {props.codePoint.general_category_abbr}
+        </div>
       </div>
       <div className="f1 b flex-auto flex items-center justify-center">
         <span>{props.codePoint.display}</span>
       </div>
-      <div className="f6 ttc" style={ {fontFamily: "Roboto Condensed"} }>{props.codePoint.name.toLowerCase()}</div>
+      <div className="f6 ttc font-family-condensed">
+        {props.codePoint.name.toLowerCase()}
+      </div>
     </div>
   );
 };
@@ -135,7 +144,7 @@ const inputValueFromUrl = () => {
 };
 
 const setInputValueInTitle = (inputValue: string) => {
-  const titleElement = document.getElementsByTagName('title').item(0);
+  const titleElement = document.getElementsByTagName("title").item(0);
   if (titleElement) {
     titleElement.innerText = `unicode.fyi – ${inputValue}`;
   }
