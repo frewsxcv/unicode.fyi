@@ -43,12 +43,14 @@ class App extends React.Component<{}, AppState> {
     this.state = {
       inputValue: inputValueFromUrl() || "Family! 👨‍👨‍👧‍👧"
     };
+    setInputValueInTitle(this.state.inputValue);
   }
 
   render() {
     const onInput = (evt: React.FormEvent<HTMLInputElement>) => {
       const inputValue = (evt.target as HTMLInputElement).value || "";
       setInputValueInUrl(inputValue);
+      setInputValueInTitle(inputValue);
       this.setState({ inputValue });
     };
 
@@ -130,6 +132,13 @@ const setInputValueInUrl = (inputValue: string) => {
 
 const inputValueFromUrl = () => {
   return new URL(window.location.toString()).searchParams.get("q");
+};
+
+const setInputValueInTitle = (inputValue: string) => {
+  const titleElement = document.getElementsByTagName('title').item(0);
+  if (titleElement) {
+    titleElement.innerText = `unicode.fyi – ${inputValue}`;
+  }
 };
 
 ReactDOM.render(<App />, app);
