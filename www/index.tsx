@@ -77,9 +77,7 @@ const InputComponent = (props: {
     <input
       type="text"
       id="input"
-      onInput={evt =>
-        props.onInput((evt.target as HTMLInputElement).value || "")
-      }
+      onInput={evt => props.onInput(evt.currentTarget.value || "")}
       defaultValue={props.defaultValue}
       className="mb3 bn pa2"
     />
