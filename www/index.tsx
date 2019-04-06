@@ -65,7 +65,7 @@ class App extends React.Component<{}, AppState> {
             defaultValue={this.state.inputValue}
           />
         </TopBarComponent>
-        <div className="overflow-scroll flex">{words}</div>
+        <div className="overflow-scroll flex mt2">{words}</div>
       </div>
     );
   }
@@ -101,7 +101,7 @@ const WordComponent = (props: { word: Word }) => {
 
   return (
     <div>
-      <div className="pa2 mr2 mt2 bg-yellow">
+      <div className="pa2 ml2 bg-yellow">
         <div>{props.word.content}</div>
       </div>
       <div className="flex">{graphemeClusterComponents}</div>
@@ -120,7 +120,7 @@ const GraphemeClusterComponent = (props: {
 
   return (
     <div>
-      <div className="pa2 mr2 mt2 bg-yellow">
+      <div className="pa2 ml2 mt2 bg-yellow">
         <div>{props.graphemeCluster.content}</div>
       </div>
       <div className="flex">{codePointComponents}</div>
@@ -131,7 +131,7 @@ const GraphemeClusterComponent = (props: {
 const CodePointComponent = (props: { codePoint: CodePoint }) => {
   return (
     <div
-      className="pa3 mr2 mt2 bg-blue white nowrap tc flex flex-column"
+      className="pa3 mt2 ml2 bg-blue white nowrap tc flex flex-column"
       style={{ height: "10rem" }}
     >
       <div className="flex">
