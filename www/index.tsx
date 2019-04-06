@@ -41,7 +41,7 @@ class App extends React.Component<{}, AppState> {
   constructor(props: {}) {
     super(props);
     this.state = {
-      inputValue: inputValueFromUrl() || "g̈Family! 👨‍👨‍👧‍👧"
+      inputValue: inputValueFromUrl() || "Family! 👨‍👨‍👧‍👧"
     };
   }
 
