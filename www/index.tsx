@@ -65,7 +65,7 @@ class App extends React.Component<{}, AppState> {
             defaultValue={this.state.inputValue}
           />
         </TopBarComponent>
-        <div className="flex">{words}</div>
+        <div className="overflow-scroll flex">{words}</div>
       </div>
     );
   }
