@@ -60,12 +60,12 @@ impl GraphemeCluster {
 #[derive(Debug, Serialize)]
 pub struct CodePoint {
     age: String,
+    category: String,
+    category_abbr: &'static str,
     category_color: &'static str,
     char: char,
     code: String,
     display: String,
-    general_category: String,
-    general_category_abbr: &'static str,
     grapheme_cluster_break: String,
     is_alphabetic: bool,
     is_lowercase: bool,
@@ -78,12 +78,12 @@ impl CodePoint {
     fn from_char(c: char) -> Self {
         CodePoint {
             age: char_age(c),
+            category: char_category(c).to_string(),
+            category_abbr: char_category(c).abbr_name(),
             category_color: char_category_color(c),
             char: c,
             code: char_code(c),
             display: char_display(c),
-            general_category: char_category(c).to_string(),
-            general_category_abbr: char_category(c).abbr_name(),
             grapheme_cluster_break: unic_ucd::GraphemeClusterBreak::of(c).to_string(),
             is_alphabetic: unic_ucd::Alphabetic::of(c).as_bool(),
             is_lowercase: unic_ucd::Lowercase::of(c).as_bool(),

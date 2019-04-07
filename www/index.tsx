@@ -16,12 +16,12 @@ interface GraphemeCluster {
 
 interface CodePoint {
   age: string;
+  category: string;
+  category_abbr: string;
   category_color: string;
   char: string;
   code: string;
   display: string;
-  general_category: string;
-  general_category_abbr: string;
   grapheme_cluster_break: string;
   is_alphabetic: boolean;
   is_lowercase: boolean;
@@ -141,7 +141,7 @@ const CodePointComponent = (props: { codePoint: CodePoint }) => {
           {props.codePoint.code}
         </div>
         <div className="f6 w-50 tr font-family-condensed ml3">
-          {props.codePoint.general_category_abbr}
+          {props.codePoint.category_abbr}
         </div>
       </div>
       <div className="f1 b flex-auto flex items-center justify-center">
