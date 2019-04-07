@@ -87,7 +87,11 @@ const InputComponent = (props: {
 
 const WordsComponent = (props: { inputValue: string }) => {
   const words = unicodeInfo(props.inputValue).map((word, idx) => {
-    return <WordComponent word={word} key={idx} />;
+    return (
+      <div>
+        <WordComponent word={word} key={idx} />
+      </div>
+    );
   });
 
   return (
@@ -101,18 +105,20 @@ const WordComponent = (props: { word: Word }) => {
   const graphemeClusterComponents = props.word.grapheme_clusters.map(
     (graphemeCluster, idx) => {
       return (
-        <GraphemeClusterComponent graphemeCluster={graphemeCluster} key={idx} />
+        <div>
+          <GraphemeClusterComponent graphemeCluster={graphemeCluster} key={idx} />
+        </div>
       );
     }
   );
 
   return (
-    <div>
+    <>
       <div className="pa2 ml1 bg-moon-gray h2 flex items-center">
         <div>{props.word.content}</div>
       </div>
       <div className="flex">{graphemeClusterComponents}</div>
-    </div>
+    </>
   );
 };
 
@@ -121,17 +127,21 @@ const GraphemeClusterComponent = (props: {
 }) => {
   const codePointComponents = props.graphemeCluster.code_points.map(
     (codePoint, idx) => {
-      return <CodePointComponent codePoint={codePoint} key={idx} />;
+      return (
+        <div>
+          <CodePointComponent codePoint={codePoint} key={idx} />
+        </div>
+      );
     }
   );
 
   return (
-    <div>
+    <>
       <div className="pa2 ml1 mt1 bg-moon-gray h2 flex items-center">
         <div>{props.graphemeCluster.content}</div>
       </div>
       <div className="flex">{codePointComponents}</div>
-    </div>
+    </>
   );
 };
 
