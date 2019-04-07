@@ -59,21 +59,21 @@ class App extends React.Component<{}, AppState> {
     });
 
     return (
-      <div className="ma4">
+      <div className="ma4 bg-pink pa2">
         <TopBarComponent>
           <InputComponent
             onInput={onInput}
             defaultValue={this.state.inputValue}
           />
         </TopBarComponent>
-        <div className="overflow-scroll flex mt2">{words}</div>
+        <div className="overflow-scroll flex mt2 bg-white pt2 pb2">{words}</div>
       </div>
     );
   }
 }
 
 const TopBarComponent = (props: { children: React.ReactNode }) => {
-  return <div className="w-100 p2 bg-green flex">{props.children}</div>;
+  return <div className="w-100 bg-green flex">{props.children}</div>;
 };
 
 const InputComponent = (props: {
@@ -84,7 +84,7 @@ const InputComponent = (props: {
     <textarea
       onInput={evt => props.onInput(evt.currentTarget.value)}
       defaultValue={props.defaultValue}
-      className="ma3 bn pa2 flex-auto"
+      className="ma2 bn pa2 flex-auto"
     />
   );
 };
