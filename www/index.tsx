@@ -106,7 +106,10 @@ const WordComponent = (props: { word: Word }) => {
     (graphemeCluster, idx) => {
       return (
         <div>
-          <GraphemeClusterComponent graphemeCluster={graphemeCluster} key={idx} />
+          <GraphemeClusterComponent
+            graphemeCluster={graphemeCluster}
+            key={idx}
+          />
         </div>
       );
     }
@@ -176,9 +179,8 @@ const setInputValueInUrl = (inputValue: string) => {
   window.history.replaceState({}, "", "?q=" + encodeURIComponent(inputValue));
 };
 
-const inputValueFromUrl = () => {
-  return new URL(window.location.toString()).searchParams.get("q");
-};
+const inputValueFromUrl = () =>
+  new URL(window.location.toString()).searchParams.get("q");
 
 const setInputValueInTitle = (inputValue: string) => {
   const titleElement = document.getElementsByTagName("title").item(0);

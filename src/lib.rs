@@ -18,15 +18,16 @@ pub fn unicode_info(s: &str) -> JsValue {
     JsValue::from_serde(
         &unic_segment::Words::new(&s, |_| true)
             .map(|word_str| Word::from_str(word_str))
-            .collect::<Vec<_>>()
-    ).unwrap()
+            .collect::<Vec<_>>(),
+    )
+    .unwrap()
 }
 
 #[wasm_bindgen]
 #[derive(Debug, Serialize)]
 pub struct Word {
     content: String,
-    grapheme_clusters: Vec<GraphemeCluster>
+    grapheme_clusters: Vec<GraphemeCluster>,
 }
 
 impl Word {
@@ -35,7 +36,7 @@ impl Word {
             content: word_str.to_string(),
             grapheme_clusters: unic_segment::Graphemes::new(word_str)
                 .map(|gc| GraphemeCluster::from_str(gc))
-                .collect()
+                .collect(),
         }
     }
 }
@@ -51,7 +52,7 @@ impl GraphemeCluster {
     fn from_str(s: &str) -> Self {
         Self {
             content: s.to_owned(),
-            code_points: s.chars().map(CodePoint::from_char).collect()
+            code_points: s.chars().map(CodePoint::from_char).collect(),
         }
     }
 }
@@ -110,7 +111,8 @@ fn char_name(c: char) -> String {
 }
 
 fn char_name_abbreviations(c: char) -> Option<String> {
-    unic_ucd::name_aliases_of(c, unic_ucd::NameAliasType::NameAbbreviations).map(|abbrs| abbrs[0].to_owned())
+    unic_ucd::name_aliases_of(c, unic_ucd::NameAliasType::NameAbbreviations)
+        .map(|abbrs| abbrs[0].to_owned())
 }
 
 fn char_age(c: char) -> String {
@@ -132,35 +134,20 @@ fn char_category_color(c: char) -> &'static str {
     use unic_ucd::GeneralCategory::*;
 
     match char_category(c) {
-        UppercaseLetter |
-        LowercaseLetter |
-        TitlecaseLetter |
-        ModifierLetter |
-        OtherLetter => "green",
+        UppercaseLetter | LowercaseLetter | TitlecaseLetter | ModifierLetter | OtherLetter => {
+            "green"
+        }
 
-        NonspacingMark |
-        SpacingMark |
-        EnclosingMark => "red",
+        NonspacingMark | SpacingMark | EnclosingMark => "red",
 
-        DecimalNumber |
-        LetterNumber |
-        OtherNumber => "blue",
+        DecimalNumber | LetterNumber | OtherNumber => "blue",
 
-        ConnectorPunctuation |
-        DashPunctuation |
-        OpenPunctuation |
-        ClosePunctuation |
-        InitialPunctuation |
-        FinalPunctuation |
-        OtherPunctuation => "orange",
+        ConnectorPunctuation | DashPunctuation | OpenPunctuation | ClosePunctuation
+        | InitialPunctuation | FinalPunctuation | OtherPunctuation => "orange",
 
-        MathSymbol |
-        CurrencySymbol |
-        ModifierSymbol |
-        OtherSymbol => "purple",
+        MathSymbol | CurrencySymbol | ModifierSymbol | OtherSymbol => "purple",
 
-        SpaceSeparator |
-        LineSeparator => "pink",
+        SpaceSeparator | LineSeparator => "pink",
 
         Format => "brown",
 
