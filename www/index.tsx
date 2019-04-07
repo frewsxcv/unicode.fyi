@@ -54,10 +54,6 @@ class App extends React.Component<{}, AppState> {
       this.setState({ inputValue });
     };
 
-    const words = unicodeInfo(this.state.inputValue).map((word, idx) => {
-      return <WordComponent word={word} key={idx} />;
-    });
-
     return (
       <div className="ma4 bg-pink pa2">
         <TopBarComponent>
@@ -66,9 +62,7 @@ class App extends React.Component<{}, AppState> {
             defaultValue={this.state.inputValue}
           />
         </TopBarComponent>
-        <div className="bg-green pa2 pb2 mt2">
-          <div className="overflow-scroll flex bg-white">{words}</div>
-        </div>
+        <WordsComponent inputValue={this.state.inputValue} />
       </div>
     );
   }
@@ -88,6 +82,18 @@ const InputComponent = (props: {
       defaultValue={props.defaultValue}
       className="ma2 bn pa2 flex-auto"
     />
+  );
+};
+
+const WordsComponent = (props: { inputValue: string }) => {
+  const words = unicodeInfo(props.inputValue).map((word, idx) => {
+    return <WordComponent word={word} key={idx} />;
+  });
+
+  return (
+    <div className="bg-green pa2 pb2 mt2">
+      <div className="overflow-scroll flex bg-white">{words}</div>
+    </div>
   );
 };
 
