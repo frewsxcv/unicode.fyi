@@ -162,11 +162,12 @@ fn char_category_color(c: char) -> &'static str {
         SpaceSeparator |
         LineSeparator => "pink",
 
+        Format => "brown",
+
         // TODO: should these all be grouped?
-        ParagraphSeparator => "green",
-        Control => "grey",
-        Format => "grey",
-        Surrogate => "grey",
+        Control => "gray",
+        Surrogate => "gray",
+        ParagraphSeparator => "gray",
         PrivateUse => "grey",
         Unassigned => "grey",
     }
