@@ -175,7 +175,7 @@ fn char_category_color(c: char) -> &'static str {
 
 // 'c' -> "U+0063"
 fn char_code(c: char) -> String {
-    format!("U+{:04x}", c as u32).to_ascii_uppercase()
+    format!("U+{:04X}", c as u32)
 }
 
 #[cfg(test)]
