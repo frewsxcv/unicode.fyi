@@ -168,8 +168,8 @@ const CodePointComponent = (props: { codePoint: CodePoint }) => {
       <div className="f1 b flex-auto flex items-center justify-center">
         <span>{props.codePoint.display}</span>
       </div>
-      <div className="f6 ttc font-family-condensed">
-        {props.codePoint.name.toLowerCase()}
+      <div className="f6 font-family-condensed">
+        {props.codePoint.name}
       </div>
     </div>
   );

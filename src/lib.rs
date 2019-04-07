@@ -106,6 +106,7 @@ fn char_display(c: char) -> String {
 fn char_name(c: char) -> String {
     unic_ucd::Name::of(c)
         .map(|n| n.to_string())
+        .map(|n| ascii_string_to_title_case(n))
         .or_else(|| char_name_abbreviations(c))
         .unwrap_or_else(|| "<none>".to_owned())
 }
@@ -165,6 +166,27 @@ fn char_code(c: char) -> String {
     format!("U+{:04X}", c as u32)
 }
 
+fn ascii_string_to_title_case(s: String) -> String {
+    if s.is_empty() {
+        return s;
+    }
+    let mut bytes = s.into_bytes();
+    for i in 1..bytes.len() {
+        let is_new_word = bytes
+            .get(i - 1)
+            .map(|c| !(*c as char).is_alphabetic())
+            .unwrap_or(true);
+        if let Some(b) = bytes.get_mut(i) {
+            *b = if is_new_word {
+                (*b as char).to_ascii_uppercase()
+            } else {
+                (*b as char).to_ascii_lowercase()
+            } as u8;
+        }
+    }
+    String::from_utf8(bytes).unwrap()
+}
+
 #[cfg(test)]
 mod test {
     use super::*;
@@ -172,5 +194,10 @@ mod test {
     #[test]
     fn test_char_code() {
         assert_eq!(char_code('👨'), "U+1F468");
+    }
+
+    #[test]
+    fn test_ascii_string_to_title_case() {
+        assert_eq!("Foo Bar", ascii_string_to_title_case("FOO BAR".to_string()));
     }
 }
