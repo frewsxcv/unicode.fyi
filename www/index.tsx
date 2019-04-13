@@ -38,6 +38,10 @@ interface AppState {
   inputValue: string;
 }
 
+const examples = [
+  "\u{a0}\u{a0}▲\n▲\u{a0}▲",
+];
+
 class App extends React.Component<{}, AppState> {
   constructor(props: {}) {
     super(props);
