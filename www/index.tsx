@@ -42,7 +42,7 @@ class App extends React.Component<{}, AppState> {
   constructor(props: {}) {
     super(props);
     this.state = {
-      inputValue: inputValueFromUrl() || "Family! 👨‍👨‍👧‍👧"
+      inputValue: inputValueFromUrl() || "",
     };
     setInputValueInTitle(this.state.inputValue);
   }
@@ -84,6 +84,7 @@ const InputComponent = (props: {
       onInput={evt => props.onInput(evt.currentTarget.value)}
       defaultValue={props.defaultValue}
       className="bn pa3 flex-auto custom-border-radius-sm"
+      placeholder="Enter text..."
       {...extraAttributes}
     />
   );
