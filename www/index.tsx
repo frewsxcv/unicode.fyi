@@ -55,7 +55,7 @@ class App extends React.Component<{}, AppState> {
     };
 
     return (
-      <div className="shadow-2 ma4 custom-bg-light-grey custom-border-radius-lg pa3">
+      <div className="shadow-4 ma4 custom-bg-light-grey custom-border-radius-lg pa3">
         <TopBarComponent>
           <InputComponent
             onInput={onInput}
