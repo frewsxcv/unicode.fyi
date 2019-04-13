@@ -122,7 +122,7 @@ const WordComponent = (props: { word: Word }) => {
 
   return (
     <>
-      <div className="pa2 ml1 bg-moon-gray h2 flex items-center">
+      <div className="pa2 ml1 bg-white h2 flex items-center custom-border-radius-sm-top">
         <div>{props.word.content}</div>
       </div>
       <div className="flex">{graphemeClusterComponents}</div>
@@ -145,7 +145,7 @@ const GraphemeClusterComponent = (props: {
 
   return (
     <>
-      <div className="pa2 ml1 mt1 bg-moon-gray h2 flex items-center">
+      <div className="pa2 ml1 mt1 bg-white h2 flex items-center">
         <div>{props.graphemeCluster.content}</div>
       </div>
       <div className="flex">{codePointComponents}</div>
@@ -158,19 +158,17 @@ const CodePointComponent = (props: { codePoint: CodePoint }) => {
     <div
       className="pa3 mt1 ml1 nowrap tc flex flex-column bg-white custom-border-radius-sm-bottom"
       style={{
-        height: "10rem"
+        height: "10rem",
+        borderBottomWidth: "5px",
+        borderBottomStyle: "solid",
+        borderBottomColor: props.codePoint.category_color
       }}
     >
       <div className="flex">
         <div className="f6 w-50 tl font-family-condensed">
           {props.codePoint.code}
         </div>
-        <div
-          className="f6 w-50 tr font-family-condensed ml3"
-          style={{
-            backgroundColor: props.codePoint.category_color
-          }}
-        >
+        <div className="f6 w-50 tr font-family-condensed ml3">
           {props.codePoint.category_abbr}
         </div>
       </div>
