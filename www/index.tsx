@@ -122,7 +122,13 @@ const WordComponent = (props: { word: Word }) => {
 
   return (
     <>
-      <div className="pa2 ml1 bg-white h2 flex items-center custom-border-radius-sm-top">
+      <div className="f6 pa3 ml1 bg-white h2 flex items-center custom-border-radius-sm-top"
+      style={{
+        borderTopWidth: "5px",
+        borderTopStyle: "solid",
+        borderTopColor: "lightgrey"
+      }}
+      >
         <div>{props.word.content}</div>
       </div>
       <div className="flex">{graphemeClusterComponents}</div>
@@ -145,7 +151,7 @@ const GraphemeClusterComponent = (props: {
 
   return (
     <>
-      <div className="pa2 ml1 mt1 bg-white h2 flex items-center">
+      <div className="f6 pa3 ml1 mt1 bg-white h2 flex items-center">
         <div>{props.graphemeCluster.content}</div>
       </div>
       <div className="flex">{codePointComponents}</div>
