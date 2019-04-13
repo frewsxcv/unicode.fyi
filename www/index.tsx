@@ -76,11 +76,15 @@ const InputComponent = (props: {
   defaultValue: string;
   onInput(inputValue: string): void;
 }) => {
+  const extraAttributes = {
+    spellcheck: 'false',
+  };
   return (
     <textarea
       onInput={evt => props.onInput(evt.currentTarget.value)}
       defaultValue={props.defaultValue}
       className="bn pa3 flex-auto custom-border-radius-sm"
+      {...extraAttributes}
     />
   );
 };
