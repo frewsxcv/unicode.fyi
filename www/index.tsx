@@ -99,8 +99,8 @@ const WordsComponent = (props: { inputValue: string }) => {
   });
 
   return (
-    <div className="bg-green pa2 pb2 mt2">
-      <div className="overflow-scroll flex bg-white">{words}</div>
+    <div className="mt3">
+      <div className="overflow-scroll flex">{words}</div>
     </div>
   );
 };
@@ -155,17 +155,21 @@ const GraphemeClusterComponent = (props: {
 const CodePointComponent = (props: { codePoint: CodePoint }) => {
   return (
     <div
-      className="pa3 mt1 ml1 white nowrap tc flex flex-column"
+      className="pa3 mt1 ml1 nowrap tc flex flex-column bg-white custom-border-radius-sm-bottom"
       style={{
         height: "10rem",
-        backgroundColor: props.codePoint.category_color
       }}
     >
       <div className="flex">
         <div className="f6 w-50 tl font-family-condensed">
           {props.codePoint.code}
         </div>
-        <div className="f6 w-50 tr font-family-condensed ml3">
+        <div
+          className="f6 w-50 tr font-family-condensed ml3"
+          style={{
+            backgroundColor: props.codePoint.category_color
+          }}
+        >
           {props.codePoint.category_abbr}
         </div>
       </div>
