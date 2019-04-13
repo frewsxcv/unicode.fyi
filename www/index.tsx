@@ -42,7 +42,7 @@ class App extends React.Component<{}, AppState> {
   constructor(props: {}) {
     super(props);
     this.state = {
-      inputValue: inputValueFromUrl() || "",
+      inputValue: inputValueFromUrl() || ""
     };
     setInputValueInTitle(this.state.inputValue);
   }
@@ -77,7 +77,7 @@ const InputComponent = (props: {
   onInput(inputValue: string): void;
 }) => {
   const extraAttributes = {
-    spellcheck: 'false',
+    spellcheck: "false"
   };
   return (
     <textarea
@@ -158,7 +158,7 @@ const CodePointComponent = (props: { codePoint: CodePoint }) => {
     <div
       className="pa3 mt1 ml1 nowrap tc flex flex-column bg-white custom-border-radius-sm-bottom"
       style={{
-        height: "10rem",
+        height: "10rem"
       }}
     >
       <div className="flex">
@@ -177,9 +177,7 @@ const CodePointComponent = (props: { codePoint: CodePoint }) => {
       <div className="f1 b flex-auto flex items-center justify-center">
         <span>{props.codePoint.display}</span>
       </div>
-      <div className="f6 font-family-condensed">
-        {props.codePoint.name}
-      </div>
+      <div className="f6 font-family-condensed">{props.codePoint.name}</div>
     </div>
   );
 };
