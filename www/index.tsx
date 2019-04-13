@@ -55,7 +55,7 @@ class App extends React.Component<{}, AppState> {
     };
 
     return (
-      <div className="ma4 bg-pink pa2">
+      <div className="shadow-2 ma4 custom-bg-light-grey custom-border-radius-lg pa3">
         <TopBarComponent>
           <InputComponent
             onInput={onInput}
@@ -69,7 +69,7 @@ class App extends React.Component<{}, AppState> {
 }
 
 const TopBarComponent = (props: { children: React.ReactNode }) => {
-  return <div className="w-100 bg-green flex">{props.children}</div>;
+  return <div className="w-100 flex">{props.children}</div>;
 };
 
 const InputComponent = (props: {
@@ -80,7 +80,7 @@ const InputComponent = (props: {
     <textarea
       onInput={evt => props.onInput(evt.currentTarget.value)}
       defaultValue={props.defaultValue}
-      className="ma2 bn pa2 flex-auto"
+      className="bn pa3 flex-auto custom-border-radius-sm"
     />
   );
 };
