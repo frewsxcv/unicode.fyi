@@ -24,6 +24,8 @@ module.exports = {
         new CopyWebpackPlugin([
           'index.html',
           'tachyons.min.css',
+          'favicon-32x32.png',
+          'favicon-16x16.png',
         ])
     ],
 };
