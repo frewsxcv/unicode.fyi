@@ -36,17 +36,29 @@ const unicodeInfo = (s: string): Word[] => {
 
 interface AppState {
   inputValue: string;
+  forceInput: boolean;
 }
 
 const examples = [
-  "\u{a0}\u{a0}▲\n▲\u{a0}▲",
+  "\u{a0}\u{a0}\u{a0}\u{a0}▲\n▲\u{a0}▲▲\n▲\u{a0}▲", // triforce
+  "¡Amo a mi familia! ❤️ 👨‍👨‍👧‍👧",
+  "“Arrr!” 🏴‍☠️",
+  "раураӏ.com",
+  "Yahtzee: ⚂⚂⚂⚂⚂",
+  "תֹ֙הוּ֙ וָבֹ֔הוּ",
+  "♸ – Polystyrene",
+  "(╯°□°）╯︵ ┻━┻",
+  "ಠ_ಠ",
+  "¯\\_(ツ)_/¯",
+  "14 Street–Union Square\nTrains: ④⑤⑥ⓁⓃⓆⓇⓌ"
 ];
 
 class App extends React.Component<{}, AppState> {
   constructor(props: {}) {
     super(props);
     this.state = {
-      inputValue: inputValueFromUrl() || ""
+      inputValue: inputValueFromUrl() || "",
+      forceInput: false
     };
     setInputValueInTitle(this.state.inputValue);
   }
@@ -55,7 +67,14 @@ class App extends React.Component<{}, AppState> {
     const onInput = (inputValue: string) => {
       setInputValueInUrl(inputValue);
       setInputValueInTitle(inputValue);
-      this.setState({ inputValue });
+      this.setState({ inputValue, forceInput: false });
+    };
+
+    const onShuffleClick = () => {
+      const example = examples[Math.floor(Math.random() * examples.length)];
+      setInputValueInUrl(example);
+      setInputValueInTitle(example);
+      this.setState({ inputValue: example, forceInput: true });
     };
 
     return (
@@ -63,8 +82,10 @@ class App extends React.Component<{}, AppState> {
         <TopBarComponent>
           <InputComponent
             onInput={onInput}
+            forceInput={this.state.forceInput}
             defaultValue={this.state.inputValue}
           />
+          <button onClick={onShuffleClick}>🎲</button>
         </TopBarComponent>
         <WordsComponent inputValue={this.state.inputValue} />
       </div>
@@ -78,6 +99,7 @@ const TopBarComponent = (props: { children: React.ReactNode }) => {
 
 const InputComponent = (props: {
   defaultValue: string;
+  forceInput: boolean;
   onInput(inputValue: string): void;
 }) => {
   const extraAttributes = {
@@ -87,6 +109,7 @@ const InputComponent = (props: {
     <textarea
       onInput={evt => props.onInput(evt.currentTarget.value)}
       defaultValue={props.defaultValue}
+      value={props.forceInput ? props.defaultValue : undefined}
       className="bn pa3 flex-auto custom-border-radius-sm"
       placeholder="Enter text..."
       {...extraAttributes}
