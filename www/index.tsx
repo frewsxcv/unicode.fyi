@@ -44,7 +44,7 @@ const examples = [
   "\u{a0}\u{a0}▲\n▲\u{a0}▲", // triforce
   "¡Amo a mi familia! ❤️ 👨‍👨‍👧‍👧",
   "“Arrr!” 🏴‍☠️",
-  "раураӏ.com",
+  "раураӏ.com", // homograph attack (Cyrillic lookalikes)
   "Yahtzee: ⚂⚂⚂⚂⚂",
   "תֹ֙הוּ֙ וָבֹ֔הוּ",
   "♸ – Polystyrene",
