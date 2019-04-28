@@ -41,7 +41,7 @@ interface AppState {
 
 const examples = [
   "𒀭𒄿𒋾𒀭𒂗𒍪", // Iddin-Sin (Sumerian cuneiform)
-  "\u{a0}\u{a0}\u{a0}\u{a0}▲\n▲\u{a0}▲▲\n▲\u{a0}▲", // triforce
+  "\u{a0}\u{a0}▲\n▲\u{a0}▲", // triforce
   "¡Amo a mi familia! ❤️ 👨‍👨‍👧‍👧",
   "“Arrr!” 🏴‍☠️",
   "раураӏ.com",
