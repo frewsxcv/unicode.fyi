@@ -71,8 +71,14 @@ class App extends React.Component<{}, AppState> {
       this.setState({ inputValue, forceInput: false });
     };
 
-    const onShuffleClick = () => {
+    const onShuffleClick: (() => void) = () => {
       const example = examples[Math.floor(Math.random() * examples.length)];
+
+      // Generate a new example if it’s the current text
+      if (example === this.state.inputValue) {
+        return onShuffleClick();
+      }
+
       setInputValueInUrl(example);
       setInputValueInTitle(example);
       this.setState({ inputValue: example, forceInput: true });
