@@ -48,6 +48,9 @@ const examples = [
   "𐏐 𐎠𐎭𐎶 𐏐 𐎭𐎠𐎼𐎹𐎺𐎢𐏁 𐏐 𐎧𐏁𐎠𐎹𐎰𐎡𐎹 𐏐 𐎺𐏀𐎼𐎣",
   // triforce
   "\u{a0}\u{a0}▲\n▲\u{a0}▲",
+  // “tomato, tomato” IPA
+  // International Phonetic Alphabet (IPA)
+  "/təˈmeɪtoʊ təˈmɑːtəʊ/",
   "¡Amo a mi familia! ❤️ 👨‍👨‍👧‍👧",
   "“Arrr!” 🏴‍☠️",
   // Cyrillic lookalikes homograph attack
