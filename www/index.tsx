@@ -46,6 +46,10 @@ const examples = [
   // “I am Darius the great king” from the Behistun inscription
   // [Script: Old Persian cuneiform]
   "𐏐 𐎠𐎭𐎶 𐏐 𐎭𐎠𐎼𐎹𐎺𐎢𐏁 𐏐 𐎧𐏁𐎠𐎹𐎰𐎡𐎹 𐏐 𐎺𐏀𐎼𐎣",
+  // “Here is Corb, son of Labraid”
+  // Ballyboodan Ogham Stone
+  // [Script: Ogham]
+  "᚛ᚉᚑᚏᚁᚔᚕᚑᚔᚋᚐᚊᚔᚂᚐᚏᚔᚇ᚜",
   // triforce
   "\u{a0}\u{a0}▲\n▲\u{a0}▲",
   // “tomato, tomato” IPA
