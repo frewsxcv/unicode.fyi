@@ -40,12 +40,18 @@ interface AppState {
 }
 
 const examples = [
-  "𒀭𒄿𒋾𒀭𒂗𒍪", // “Iddin-Sin” (Sumerian cuneiform)
-  "𐏃𐎧𐎠𐎶𐎴𐎡𐏁", // “Achaemenes” (Old Persian cuneiform)
-  "\u{a0}\u{a0}▲\n▲\u{a0}▲", // triforce
+  // “Iddin-Sin”
+  // [Script: Sumerian cuneiform]
+  "𒀭𒄿𒋾𒀭𒂗𒍪",
+  // “I am Darius the great king” from the Behistun inscription
+  // [Script: Old Persian cuneiform]
+  "𐏐 𐎠𐎭𐎶 𐏐 𐎭𐎠𐎼𐎹𐎺𐎢𐏁 𐏐 𐎧𐏁𐎠𐎹𐎰𐎡𐎹 𐏐 𐎺𐏀𐎼𐎣",
+  // triforce
+  "\u{a0}\u{a0}▲\n▲\u{a0}▲",
   "¡Amo a mi familia! ❤️ 👨‍👨‍👧‍👧",
   "“Arrr!” 🏴‍☠️",
-  "раураӏ.com", // Cyrillic lookalikes homograph attack
+  // Cyrillic lookalikes homograph attack
+  "раураӏ.com",
   "Yahtzee: ⚂⚂⚂⚂⚂",
   "תֹ֙הוּ֙ וָבֹ֔הוּ",
   "♸ – Polystyrene",
