@@ -50,6 +50,9 @@ const examples = [
   // Ballyboodan Ogham Stone
   // [Script: Ogham]
   "᚛ᚉᚑᚏᚁᚔᚕᚑᚔᚋᚐᚊᚔᚂᚐᚏᚔᚇ᚜",
+  // “Kenojuak Ashevak”
+  // [Script: Inuktitut]
+  "ᕿᓐᓄᐊᔪᐊᖅ ᐋᓯᕙᒃ",
   // triforce
   "\u{a0}\u{a0}▲\n▲\u{a0}▲",
   // “tomato, tomato” IPA
