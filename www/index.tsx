@@ -53,6 +53,9 @@ const examples = [
   // “Kenojuak Ashevak”
   // [Script: Inuktitut]
   "ᕿᓐᓄᐊᔪᐊᖅ ᐋᓯᕙᒃ",
+  // “Alenush Terian”
+  // [Script: Armenian]
+  "Ալենուշ Տէրեան",
   // triforce
   "\u{a0}\u{a0}▲\n▲\u{a0}▲",
   // “tomato, tomato” IPA
