@@ -91,7 +91,7 @@ class App extends React.Component<{}, AppState> {
       this.setState({ inputValue, forceInput: false });
     };
 
-    const onShuffleClick: (() => void) = () => {
+    const onShuffleClick: () => void = () => {
       const example = randomChoice(examples);
 
       // Generate a new example if it’s the current text
@@ -176,12 +176,13 @@ const WordComponent = (props: { word: Word }) => {
 
   return (
     <>
-      <div className="f6 pa3 ml1 bg-white h2 flex items-center custom-border-radius-sm-top"
-      style={{
-        borderTopWidth: "5px",
-        borderTopStyle: "solid",
-        borderTopColor: "lightgrey"
-      }}
+      <div
+        className="f6 pa3 ml1 bg-white h2 flex items-center custom-border-radius-sm-top"
+        style={{
+          borderTopWidth: "5px",
+          borderTopStyle: "solid",
+          borderTopColor: "lightgrey"
+        }}
       >
         <div>{props.word.content}</div>
       </div>
