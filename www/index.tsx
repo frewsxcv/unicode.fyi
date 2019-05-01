@@ -113,7 +113,13 @@ class App extends React.Component<{}, AppState> {
       if (isNaN(num)) {
         return;
       }
-      insertAtCursor(textArea, (String as any).fromCodePoint(num));
+      let char;
+      try {
+        char = (String as any).fromCodePoint(num);
+      } catch (RangeError) {
+        return;
+      }
+      insertAtCursor(textArea, char);
       setInputValueInUrl(textArea.value);
       setInputValueInTitle(textArea.value);
       this.setState({ inputValue: textArea.value });
