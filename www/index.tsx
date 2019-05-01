@@ -98,6 +98,23 @@ class App extends React.Component<{}, AppState> {
       this.setState({ inputValue: example, forceInput: true });
     };
 
+    const onAddClick = () => {
+      const textArea = document.getElementsByTagName("textarea")[0];
+      if (!textArea) {
+        return;
+      }
+      const input = window.prompt("Enter a UTF-8 (or UTF-16?) hex code-point (e.g. '0000' for U+0000)")
+      if (!input) {
+        return;
+      }
+      const num = parseInt(input, 16);
+      if (isNaN(num)) {
+        return;
+      }
+      insertAtCursor(textArea, (String as any).fromCodePoint(num));
+      // todo: redraw
+    };
+
     const bottomSection = this.state.inputValue ? (
       <div className="shadow-4 ma4 bg-white custom-border-radius-lg pa3">
         <WordsComponent inputValue={this.state.inputValue} />
@@ -113,9 +130,14 @@ class App extends React.Component<{}, AppState> {
               forceInput={this.state.forceInput}
               defaultValue={this.state.inputValue}
             />
-            <button className="mt2 h3 w3 custom-border-radius-sm bg-white bn" onClick={onShuffleClick}>
-              <i className="material-icons">shuffle</i>
-            </button>
+            <div className="flex">
+              <button className="mt2 h3 w3 custom-border-radius-sm bg-white bn" onClick={onShuffleClick}>
+                <i className="material-icons">shuffle</i>
+              </button>
+              <button className="mt2 h3 w3 custom-border-radius-sm bg-white bn" onClick={onAddClick}>
+                <i className="material-icons">add</i>
+              </button>
+            </div>
           </div>
         </div>
         {bottomSection}
@@ -195,6 +217,18 @@ const WordComponent = (props: { word: Word }) => {
     </>
   );
 };
+
+function insertAtCursor(myField: HTMLTextAreaElement, myValue: string) {
+  if (myField.selectionStart || myField.selectionStart === 0) {
+      var startPos = myField.selectionStart;
+      var endPos = myField.selectionEnd;
+      myField.value = myField.value.substring(0, startPos)
+          + myValue
+          + myField.value.substring(endPos || 0, myField.value.length);
+  } else {
+      myField.value += myValue;
+  }
+}
 
 const GraphemeClusterComponent = (props: {
   graphemeCluster: GraphemeCluster;
