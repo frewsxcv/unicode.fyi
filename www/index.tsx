@@ -92,9 +92,8 @@ class App extends React.Component<{}, AppState> {
     };
 
     const onShuffleClick: () => void = () => {
-      const example = randomChoice(examples);
+      const example = randomAndDifferentChoice(examples, this.state.inputValue);
 
-      // Generate a new example if it’s the current text
       if (example === this.state.inputValue) {
         return onShuffleClick();
       }
@@ -259,6 +258,14 @@ const setInputValueInTitle = (inputValue: string) => {
   if (titleElement) {
     titleElement.innerText = `unicode.fyi – ${inputValue}`;
   }
+};
+
+const randomAndDifferentChoice = <T extends {}>(xs: T[], curr: T): T => {
+  let x;
+  do {
+    x = randomChoice(xs);
+  } while (xs.length > 1 && x === curr)
+  return x;
 };
 
 const randomChoice = <T extends {}>(xs: T[]): T => {
