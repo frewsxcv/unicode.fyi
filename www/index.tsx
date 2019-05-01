@@ -104,14 +104,14 @@ class App extends React.Component<{}, AppState> {
     };
 
     const bottomSection = this.state.inputValue ? (
-      <div className="shadow-4 ma4 custom-bg-light-grey custom-border-radius-lg pa3">
+      <div className="shadow-4 ma4 bg-white custom-border-radius-lg pa3">
         <WordsComponent inputValue={this.state.inputValue} />
       </div>
     ) : null;
 
     return (
       <>
-        <div className="shadow-4 ma4 custom-bg-light-grey custom-border-radius-lg pa3">
+        <div className="shadow-4 ma4 bg-white custom-border-radius-lg pa3">
           <div className="w-100 flex flex-column">
             <InputComponent
               onInput={onInput}
@@ -143,6 +143,7 @@ const InputComponent = (props: {
       defaultValue={props.defaultValue}
       value={props.forceInput ? props.defaultValue : undefined}
       className="bn pa3 flex-auto custom-border-radius-sm"
+      style={ {backgroundColor: '#f6f6f4'} }
       placeholder="Enter text..."
       {...extraAttributes}
     />
@@ -182,9 +183,15 @@ const WordComponent = (props: { word: Word }) => {
       <div
         className="f6 pa3 ml1 bg-white h2 flex items-center custom-border-radius-sm-top"
         style={{
+          borderStyle: "solid",
           borderTopWidth: "5px",
-          borderTopStyle: "solid",
-          borderTopColor: "lightgrey"
+          borderTopColor: "lightgrey",
+          borderRightWidth: "1px",
+          borderRightColor: "rgb(240, 240, 240)",
+          borderLeftWidth: "1px",
+          borderLeftColor: "rgb(240, 240, 240)",
+          borderBottomWidth: "1px",
+          borderBottomColor: "rgb(240, 240, 240)"
         }}
       >
         <div>{props.word.content}</div>
@@ -209,7 +216,14 @@ const GraphemeClusterComponent = (props: {
 
   return (
     <>
-      <div className="f6 pa3 ml1 mt1 bg-white h2 flex items-center">
+      <div
+       className="f6 pa3 ml1 mt1 bg-white h2 flex items-center"
+      style={{
+        borderStyle: "solid",
+        borderWidth: "1px",
+        borderColor: "rgb(240, 240, 240)"
+      }}
+      >
         <div>{props.graphemeCluster.content}</div>
       </div>
       <div className="flex">{codePointComponents}</div>
@@ -223,9 +237,15 @@ const CodePointComponent = (props: { codePoint: CodePoint }) => {
       className="pa3 mt1 ml1 nowrap tc flex flex-column bg-white custom-border-radius-sm-bottom"
       style={{
         height: "10rem",
+        borderStyle: "solid",
         borderBottomWidth: "5px",
-        borderBottomStyle: "solid",
-        borderBottomColor: props.codePoint.category_color
+        borderBottomColor: props.codePoint.category_color,
+        borderTopWidth: "1px",
+        borderTopColor: "rgb(240, 240, 240)",
+        borderRightWidth: "1px",
+        borderRightColor: "rgb(240, 240, 240)",
+        borderLeftWidth: "1px",
+        borderLeftColor: "rgb(240, 240, 240)",
       }}
     >
       <div className="flex">
