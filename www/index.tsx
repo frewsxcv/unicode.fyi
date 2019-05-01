@@ -99,7 +99,7 @@ class App extends React.Component<{}, AppState> {
     };
 
     const onAddClick = () => {
-      const textArea = document.getElementsByTagName("textarea")[0];
+      const textArea = document.getElementsByTagName("textarea").item(0);
       if (!textArea) {
         return;
       }
@@ -114,7 +114,9 @@ class App extends React.Component<{}, AppState> {
         return;
       }
       insertAtCursor(textArea, (String as any).fromCodePoint(num));
-      // todo: redraw
+      setInputValueInUrl(textArea.value);
+      setInputValueInTitle(textArea.value);
+      this.setState({ inputValue: textArea.value });
     };
 
     const bottomSection = this.state.inputValue ? (
@@ -168,7 +170,7 @@ const InputComponent = (props: {
       defaultValue={props.defaultValue}
       value={props.forceInput ? props.defaultValue : undefined}
       className="bn pa3 flex-auto custom-border-radius-sm"
-      style={{ backgroundColor: "#f6f6f4" }}
+      style={{ backgroundColor: "#f6f6f4", resize: "vertical" }}
       placeholder="Enter text..."
       {...extraAttributes}
     />
