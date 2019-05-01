@@ -118,7 +118,9 @@ class App extends React.Component<{}, AppState> {
               forceInput={this.state.forceInput}
               defaultValue={this.state.inputValue}
             />
-            <button className="mt2 h2 w2 custom-border-radius-sm bg-white bn" onClick={onShuffleClick}>🎲</button>
+            <button className="mt2 h3 w3 custom-border-radius-sm bg-white bn" onClick={onShuffleClick}>
+              <i className="material-icons">shuffle</i>
+            </button>
           </div>
         </div>
         {bottomSection}
