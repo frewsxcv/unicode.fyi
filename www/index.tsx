@@ -112,24 +112,20 @@ class App extends React.Component<{}, AppState> {
     return (
       <>
         <div className="shadow-4 ma4 custom-bg-light-grey custom-border-radius-lg pa3">
-          <TopBarComponent>
+          <div className="w-100 flex flex-column">
             <InputComponent
               onInput={onInput}
               forceInput={this.state.forceInput}
               defaultValue={this.state.inputValue}
             />
             <button onClick={onShuffleClick}>🎲</button>
-          </TopBarComponent>
+          </div>
         </div>
         {bottomSection}
       </>
     );
   }
 }
-
-const TopBarComponent = (props: { children: React.ReactNode }) => {
-  return <div className="w-100 flex">{props.children}</div>;
-};
 
 const InputComponent = (props: {
   defaultValue: string;
