@@ -93,11 +93,6 @@ class App extends React.Component<{}, AppState> {
 
     const onShuffleClick: () => void = () => {
       const example = randomAndDifferentChoice(examples, this.state.inputValue);
-
-      if (example === this.state.inputValue) {
-        return onShuffleClick();
-      }
-
       setInputValueInUrl(example);
       setInputValueInTitle(example);
       this.setState({ inputValue: example, forceInput: true });
