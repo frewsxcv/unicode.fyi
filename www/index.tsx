@@ -103,7 +103,9 @@ class App extends React.Component<{}, AppState> {
       if (!textArea) {
         return;
       }
-      const input = window.prompt("Enter a UTF-8 (or UTF-16?) hex code-point (e.g. '0000' for U+0000)")
+      const input = window.prompt(
+        "Enter a UTF-8 (or UTF-16?) hex code-point (e.g. '0000' for U+0000)"
+      );
       if (!input) {
         return;
       }
@@ -131,10 +133,16 @@ class App extends React.Component<{}, AppState> {
               defaultValue={this.state.inputValue}
             />
             <div className="flex">
-              <button className="mt2 h3 w3 custom-border-radius-sm bg-white bn" onClick={onShuffleClick}>
+              <button
+                className="mt2 h3 w3 custom-border-radius-sm bg-white bn"
+                onClick={onShuffleClick}
+              >
                 <i className="material-icons">shuffle</i>
               </button>
-              <button className="mt2 h3 w3 custom-border-radius-sm bg-white bn" onClick={onAddClick}>
+              <button
+                className="mt2 h3 w3 custom-border-radius-sm bg-white bn"
+                onClick={onAddClick}
+              >
                 <i className="material-icons">add</i>
               </button>
             </div>
@@ -160,7 +168,7 @@ const InputComponent = (props: {
       defaultValue={props.defaultValue}
       value={props.forceInput ? props.defaultValue : undefined}
       className="bn pa3 flex-auto custom-border-radius-sm"
-      style={ {backgroundColor: '#f6f6f4'} }
+      style={{ backgroundColor: "#f6f6f4" }}
       placeholder="Enter text..."
       {...extraAttributes}
     />
@@ -176,9 +184,7 @@ const WordsComponent = (props: { inputValue: string }) => {
     );
   });
 
-  return (
-    <div className="overflow-scroll flex">{words}</div>
-  );
+  return <div className="overflow-scroll flex">{words}</div>;
 };
 
 const WordComponent = (props: { word: Word }) => {
@@ -220,13 +226,14 @@ const WordComponent = (props: { word: Word }) => {
 
 function insertAtCursor(myField: HTMLTextAreaElement, myValue: string) {
   if (myField.selectionStart || myField.selectionStart === 0) {
-      var startPos = myField.selectionStart;
-      var endPos = myField.selectionEnd;
-      myField.value = myField.value.substring(0, startPos)
-          + myValue
-          + myField.value.substring(endPos || 0, myField.value.length);
+    var startPos = myField.selectionStart;
+    var endPos = myField.selectionEnd;
+    myField.value =
+      myField.value.substring(0, startPos) +
+      myValue +
+      myField.value.substring(endPos || 0, myField.value.length);
   } else {
-      myField.value += myValue;
+    myField.value += myValue;
   }
 }
 
@@ -246,12 +253,12 @@ const GraphemeClusterComponent = (props: {
   return (
     <>
       <div
-       className="f6 pa3 ml1 mt1 bg-white h2 flex items-center"
-      style={{
-        borderStyle: "solid",
-        borderWidth: "1px",
-        borderColor: "rgb(240, 240, 240)"
-      }}
+        className="f6 pa3 ml1 mt1 bg-white h2 flex items-center"
+        style={{
+          borderStyle: "solid",
+          borderWidth: "1px",
+          borderColor: "rgb(240, 240, 240)"
+        }}
       >
         <div>{props.graphemeCluster.content}</div>
       </div>
@@ -274,7 +281,7 @@ const CodePointComponent = (props: { codePoint: CodePoint }) => {
         borderRightWidth: "1px",
         borderRightColor: "rgb(240, 240, 240)",
         borderLeftWidth: "1px",
-        borderLeftColor: "rgb(240, 240, 240)",
+        borderLeftColor: "rgb(240, 240, 240)"
       }}
     >
       <div className="flex">
@@ -311,7 +318,7 @@ const randomAndDifferentChoice = <T extends {}>(xs: T[], curr: T): T => {
   let x;
   do {
     x = randomChoice(xs);
-  } while (xs.length > 1 && x === curr)
+  } while (xs.length > 1 && x === curr);
   return x;
 };
 
