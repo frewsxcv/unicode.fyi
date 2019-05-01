@@ -104,18 +104,26 @@ class App extends React.Component<{}, AppState> {
       this.setState({ inputValue: example, forceInput: true });
     };
 
-    return (
+    const bottomSection = this.state.inputValue ? (
       <div className="shadow-4 ma4 custom-bg-light-grey custom-border-radius-lg pa3">
-        <TopBarComponent>
-          <InputComponent
-            onInput={onInput}
-            forceInput={this.state.forceInput}
-            defaultValue={this.state.inputValue}
-          />
-          <button onClick={onShuffleClick}>🎲</button>
-        </TopBarComponent>
         <WordsComponent inputValue={this.state.inputValue} />
       </div>
+    ) : null;
+
+    return (
+      <>
+        <div className="shadow-4 ma4 custom-bg-light-grey custom-border-radius-lg pa3">
+          <TopBarComponent>
+            <InputComponent
+              onInput={onInput}
+              forceInput={this.state.forceInput}
+              defaultValue={this.state.inputValue}
+            />
+            <button onClick={onShuffleClick}>🎲</button>
+          </TopBarComponent>
+        </div>
+        {bottomSection}
+      </>
     );
   }
 }
@@ -154,9 +162,7 @@ const WordsComponent = (props: { inputValue: string }) => {
   });
 
   return (
-    <div className="mt3">
-      <div className="overflow-scroll flex">{words}</div>
-    </div>
+    <div className="overflow-scroll flex">{words}</div>
   );
 };
 
