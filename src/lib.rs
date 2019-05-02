@@ -135,29 +135,34 @@ fn char_category_color(c: char) -> &'static str {
     use unic_ucd::GeneralCategory::*;
 
     match char_category(c) {
+        // Letter
         UppercaseLetter | LowercaseLetter | TitlecaseLetter | ModifierLetter | OtherLetter => {
-            "green"
+            "#df94c9"
         }
 
-        NonspacingMark | SpacingMark | EnclosingMark => "red",
+        // Mark
+        NonspacingMark | SpacingMark | EnclosingMark => "#faba81",
 
-        DecimalNumber | LetterNumber | OtherNumber => "blue",
+        // Number
+        DecimalNumber | LetterNumber | OtherNumber => "#f49587",
 
+        // Punctuation
         ConnectorPunctuation | DashPunctuation | OpenPunctuation | ClosePunctuation
-        | InitialPunctuation | FinalPunctuation | OtherPunctuation => "orange",
+        | InitialPunctuation | FinalPunctuation | OtherPunctuation => "#8e8bce",
 
-        MathSymbol | CurrencySymbol | ModifierSymbol | OtherSymbol => "purple",
+        // Symbol
+        MathSymbol | CurrencySymbol | ModifierSymbol | OtherSymbol => "#81b4f9",
 
-        SpaceSeparator | LineSeparator => "pink",
+        // Separator
+        SpaceSeparator | LineSeparator => "#eacccd",
 
-        Format => "brown",
-
-        // TODO: should these all be grouped?
-        Control => "gray",
-        Surrogate => "gray",
-        ParagraphSeparator => "gray",
-        PrivateUse => "grey",
-        Unassigned => "grey",
+        // Other
+        Format => "#a0d0f7",
+        Control => "#f1abf1",
+        Surrogate => "#f1abf1",
+        ParagraphSeparator => "#f1abf1",
+        PrivateUse => "#f1abf1",
+        Unassigned => "#f1abf1",
     }
 }
 
