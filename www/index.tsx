@@ -103,20 +103,8 @@ class App extends React.Component<{}, AppState> {
       if (!textArea) {
         return;
       }
-      const input = window.prompt(
-        "Enter a UTF-8 (or UTF-16?) hex code-point (e.g. '0000' for U+0000)"
-      );
-      if (!input) {
-        return;
-      }
-      const num = parseInt(input, 16);
-      if (isNaN(num)) {
-        return;
-      }
-      let char;
-      try {
-        char = (String as any).fromCodePoint(num);
-      } catch (RangeError) {
+      const char = promptForCodePoint();
+      if (!char) {
         return;
       }
       insertAtCursor(textArea, char);
@@ -332,6 +320,24 @@ const randomAndDifferentChoice = <T extends {}>(xs: T[], curr: T): T => {
 
 const randomChoice = <T extends {}>(xs: T[]): T => {
   return xs[Math.floor(Math.random() * xs.length)];
+};
+
+const promptForCodePoint = () => {
+  const input = window.prompt(
+    "Enter a UTF-8 (or UTF-16?) hex code-point (e.g. '0000' for U+0000)"
+  );
+  if (!input) {
+    return null;
+  }
+  const num = parseInt(input, 16);
+  if (isNaN(num)) {
+    return null;
+  }
+  try {
+    return (String as any).fromCodePoint(num) as string;
+  } catch (RangeError) {
+    return null;
+  }
 };
 
 ReactDOM.render(<App />, app);
