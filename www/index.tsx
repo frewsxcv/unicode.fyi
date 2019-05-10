@@ -129,8 +129,20 @@ class App extends React.Component<{}, AppState> {
               defaultValue={this.state.inputValue}
             />
             <div className="flex">
-              <Button marginLeft={false} bgColor="#df94c9" icon="shuffle" text="Random" onClick={onShuffleClick} />
-              <Button marginLeft={true} bgColor="#f49587" icon="add" text="Add codepoint" onClick={onAddClick} />
+              <Button
+                marginLeft={false}
+                bgColor="#df94c9"
+                icon="shuffle"
+                text="Random"
+                onClick={onShuffleClick}
+              />
+              <Button
+                marginLeft={true}
+                bgColor="#f49587"
+                icon="add"
+                text="Add codepoint"
+                onClick={onAddClick}
+              />
             </div>
           </div>
         </div>
@@ -154,10 +166,12 @@ const Button = (props: {
   return (
     <button
       className={classes}
-      style={ { backgroundColor: props.bgColor } }
+      style={{ backgroundColor: props.bgColor }}
       onClick={props.onClick}
     >
-      <i className="material-icons" style={{fontSize: "18px"}}>{props.icon}</i>
+      <i className="material-icons" style={{ fontSize: "18px" }}>
+        {props.icon}
+      </i>
       <div className="ml1">{props.text}</div>
     </button>
   );
