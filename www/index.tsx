@@ -114,7 +114,7 @@ class App extends React.Component<{}, AppState> {
     };
 
     const onSourceClick = () => {
-      window.location.href = "https://github.com/frewsxcv";
+      window.location.href = "https://github.com/frewsxcv/unicode.fyi";
     };
 
     const bottomSection = this.state.inputValue ? (
