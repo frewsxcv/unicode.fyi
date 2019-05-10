@@ -130,19 +130,19 @@ class App extends React.Component<{}, AppState> {
             />
             <div className="flex">
               <button
-                className="mt2 inline-flex items-center br3 bg-white bn white dim pointer pa2"
+                className="f7 mt2 inline-flex items-center br3 bn white dim pointer pa2"
                 style={ { backgroundColor: "#df94c9" } }
                 onClick={onShuffleClick}
               >
-                <i className="material-icons">shuffle</i>
+                <i className="material-icons" style={{fontSize: "18px"}}>shuffle</i>
                 <div className="ml1">Random</div>
               </button>
               <button
-                className="mt2 inline-flex items-center br3 bg-white bn white dim pointer pa2"
+                className="f7 ml1 mt2 inline-flex items-center br3 bn white dim pointer pa2"
                 style={ { backgroundColor: "#f49587" } }
                 onClick={onAddClick}
               >
-                <i className="material-icons">add</i>
+                <i className="material-icons" style={{fontSize: "18px"}}>add</i>
                 <div className="ml1">Add codepoint</div>
               </button>
             </div>
