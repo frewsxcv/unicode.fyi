@@ -144,7 +144,7 @@ class App extends React.Component<{}, AppState> {
                 marginLeft={true}
                 bgColor="#f49587"
                 icon="add"
-                text="Add codepoint"
+                text="Add code-point"
                 onClick={onAddClick}
               />
               <Button
@@ -362,7 +362,7 @@ const randomChoice = <T extends {}>(xs: T[]): T => {
 
 const promptForCodePoint = () => {
   const input = window.prompt(
-    "Enter a UTF-8 (or UTF-16?) hex code-point (e.g. '0000' for U+0000)"
+    "Enter a UTF-16 hex code-point: (e.g. if you wanted to insert '❤', enter 'U+2764' or '2764')"
   );
   if (!input) {
     return null;
