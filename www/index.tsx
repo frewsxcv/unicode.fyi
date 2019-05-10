@@ -130,14 +130,14 @@ class App extends React.Component<{}, AppState> {
             />
             <div className="flex">
               <button
-                className="mt2 h3 w3 custom-border-radius-sm bg-white bn white"
+                className="mt2 h3 w3 custom-border-radius-sm bg-white bn white dim pointer"
                 style={ { backgroundColor: "#df94c9" } }
                 onClick={onShuffleClick}
               >
                 <i className="material-icons">shuffle</i>
               </button>
               <button
-                className="mt2 h3 w3 custom-border-radius-sm bg-white bn white"
+                className="mt2 h3 w3 custom-border-radius-sm bg-white bn white dim pointer"
                 style={ { backgroundColor: "#f49587" } }
                 onClick={onAddClick}
               >
