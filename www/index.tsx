@@ -114,14 +114,14 @@ class App extends React.Component<{}, AppState> {
     };
 
     const bottomSection = this.state.inputValue ? (
-      <div className="shadow-4 ma4 bg-white custom-border-radius-lg pa3">
+      <div className="shadow-4 ma4 bg-white br4 pa3">
         <WordsComponent inputValue={this.state.inputValue} />
       </div>
     ) : null;
 
     return (
       <>
-        <div className="shadow-4 ma4 bg-white custom-border-radius-lg pa3">
+        <div className="shadow-4 ma4 bg-white br4 pa3">
           <div className="w-100 flex flex-column">
             <InputComponent
               onInput={onInput}
@@ -130,14 +130,14 @@ class App extends React.Component<{}, AppState> {
             />
             <div className="flex">
               <button
-                className="mt2 h3 w3 custom-border-radius-sm bg-white bn white dim pointer"
+                className="mt2 h3 w3 br3 bg-white bn white dim pointer"
                 style={ { backgroundColor: "#df94c9" } }
                 onClick={onShuffleClick}
               >
                 <i className="material-icons">shuffle</i>
               </button>
               <button
-                className="mt2 h3 w3 custom-border-radius-sm bg-white bn white dim pointer"
+                className="mt2 h3 w3 br3 bg-white bn white dim pointer"
                 style={ { backgroundColor: "#f49587" } }
                 onClick={onAddClick}
               >
@@ -165,7 +165,7 @@ const InputComponent = (props: {
       onInput={evt => props.onInput(evt.currentTarget.value)}
       defaultValue={props.defaultValue}
       value={props.forceInput ? props.defaultValue : undefined}
-      className="bn pa3 flex-auto custom-border-radius-sm"
+      className="bn pa3 flex-auto br3"
       style={{ backgroundColor: "#f6f6f4", resize: "vertical" }}
       placeholder="Enter text..."
       {...extraAttributes}
