@@ -129,22 +129,8 @@ class App extends React.Component<{}, AppState> {
               defaultValue={this.state.inputValue}
             />
             <div className="flex">
-              <button
-                className="f7 mt2 inline-flex items-center br3 bn white dim pointer pa2"
-                style={ { backgroundColor: "#df94c9" } }
-                onClick={onShuffleClick}
-              >
-                <i className="material-icons" style={{fontSize: "18px"}}>shuffle</i>
-                <div className="ml1">Random</div>
-              </button>
-              <button
-                className="f7 ml1 mt2 inline-flex items-center br3 bn white dim pointer pa2"
-                style={ { backgroundColor: "#f49587" } }
-                onClick={onAddClick}
-              >
-                <i className="material-icons" style={{fontSize: "18px"}}>add</i>
-                <div className="ml1">Add codepoint</div>
-              </button>
+              <Button marginLeft={false} bgColor="#df94c9" icon="shuffle" text="Random" onClick={onShuffleClick} />
+              <Button marginLeft={true} bgColor="#f49587" icon="add" text="Add codepoint" onClick={onAddClick} />
             </div>
           </div>
         </div>
@@ -153,6 +139,29 @@ class App extends React.Component<{}, AppState> {
     );
   }
 }
+
+const Button = (props: {
+  marginLeft: boolean;
+  bgColor: string;
+  icon: string;
+  text: string;
+  onClick?(): void;
+}) => {
+  let classes = "f7 mt2 inline-flex items-center br3 bn white dim pointer pa2";
+  if (props.marginLeft) {
+    classes += " ml1";
+  }
+  return (
+    <button
+      className={classes}
+      style={ { backgroundColor: props.bgColor } }
+      onClick={props.onClick}
+    >
+      <i className="material-icons" style={{fontSize: "18px"}}>{props.icon}</i>
+      <div className="ml1">{props.text}</div>
+    </button>
+  );
+};
 
 const InputComponent = (props: {
   defaultValue: string;
