@@ -170,7 +170,7 @@ const Button = (props: {
   text: string;
   onClick?(): void;
 }) => {
-  let classes = "f7 mt2 inline-flex items-center br3 bn white dim pointer pa2";
+  let classes = "f7 mt2 inline-flex items-center br2 bn white dim pointer pa2";
   if (props.marginLeft) {
     classes += " ml1";
   }
