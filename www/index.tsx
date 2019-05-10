@@ -128,7 +128,7 @@ class App extends React.Component<{}, AppState> {
               forceInput={this.state.forceInput}
               defaultValue={this.state.inputValue}
             />
-            <div className="flex">
+            <div className="flex justify-end">
               <Button
                 marginLeft={false}
                 bgColor="#df94c9"
