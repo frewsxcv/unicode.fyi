@@ -113,6 +113,10 @@ class App extends React.Component<{}, AppState> {
       this.setState({ inputValue: textArea.value });
     };
 
+    const onSourceClick = () => {
+      window.location.href = "https://github.com/frewsxcv";
+    };
+
     const bottomSection = this.state.inputValue ? (
       <div className="shadow-4 ma4 bg-white br4 pa3">
         <WordsComponent inputValue={this.state.inputValue} />
@@ -142,6 +146,13 @@ class App extends React.Component<{}, AppState> {
                 icon="add"
                 text="Add codepoint"
                 onClick={onAddClick}
+              />
+              <Button
+                marginLeft={true}
+                bgColor="#faba81"
+                icon="code"
+                text="Source"
+                onClick={onSourceClick}
               />
             </div>
           </div>
