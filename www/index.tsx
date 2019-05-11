@@ -56,6 +56,10 @@ const examples = [
   // “Alenush Terian”
   // [Script: Armenian]
   "Ալենուշ Տէրեան",
+  // First verse from Codex Assemanianus
+  // [Script: Glagolitic]
+  "Ⰽⱐⱀⰹⰳⱏⰹ ⱃ҃ⱁⰴⱄⱅⰲⰰ ⰻ҃ⱆ҃ⱈⰲⰰ · ⱄ҃ⱀⰰ ⰴ҃ⰴⰲⰰ · ⱄ҃ⱀⰰ Ⰰⰲⱃⰰⰰ̄ⰿⰾ̄ⱑ · ",
+
   // triforce
   "\u{a0}\u{a0}▲\n▲\u{a0}▲",
   // “tomato, tomato” IPA
