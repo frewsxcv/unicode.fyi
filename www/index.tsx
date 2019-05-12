@@ -59,6 +59,9 @@ const examples = [
   // First verse from Codex Assemanianus
   // [Script: Glagolitic]
   "Ⰽⱐⱀⰹⰳⱏⰹ ⱃ҃ⱁⰴⱄⱅⰲⰰ ⰻ҃ⱆ҃ⱈⰲⰰ · ⱄ҃ⱀⰰ ⰴ҃ⰴⰲⰰ · ⱄ҃ⱀⰰ Ⰰⰲⱃⰰⰰ̄ⰿⰾ̄ⱑ · ",
+  // “Tohu wa-bohu”
+  // [Script: Hebrew]
+  "תֹ֙הוּ֙ וָבֹ֔הוּ",
 
   // Regional Indicator Symbols for Nordic countries
   "🇩🇰🇫🇴🇬🇱🇮🇸🇳🇴🇸🇪",
@@ -72,7 +75,6 @@ const examples = [
   // Cyrillic lookalikes homograph attack
   "раураӏ.com",
   "Yahtzee: ⚂⚂⚂⚂⚂",
-  "תֹ֙הוּ֙ וָבֹ֔הוּ",
   "♸ – Polystyrene",
   "(╯°□°）╯︵ ┻━┻",
   "ಠ_ಠ",
