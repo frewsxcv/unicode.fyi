@@ -1,4 +1,4 @@
-import * as wasm from "unicode-fyi";
+import * as wasm from "../pkg/unicode_fyi";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
