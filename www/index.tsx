@@ -62,6 +62,13 @@ const examples = [
   // “Tohu wa-bohu”
   // [Script: Hebrew]
   "תֹ֙הוּ֙ וָבֹ֔הוּ",
+  // “Hindi Zahra”
+  // [Script: Tamazight]
+  "ⵜⵉⵏⴰⵔⵉⵡⵉⵏ",
+
+  // “Jyothirgamaya”
+  // [Script: Braille]
+  "⠠⠚⠽⠕⠞⠓⠊⠗⠛⠁⠍⠁⠽⠁",
 
   // Regional Indicator Symbols for Nordic countries
   "🇩🇰🇫🇴🇬🇱🇮🇸🇳🇴🇸🇪",
@@ -74,7 +81,12 @@ const examples = [
   "“Arrr!” 🏴‍☠️",
   // Cyrillic lookalikes homograph attack
   "раураӏ.com",
-  "Yahtzee: ⚂⚂⚂⚂⚂",
+  // De Morgan's law
+  "¬(𝑃∨𝑄)⇔(¬𝑃)∧(¬𝑄)",
+  // Royal Flush
+  "🂺🂻🂽🂾🂱",
+  // Yahtzee straight
+  "⚁⚂⚃⚄⚅",
   "♸ – Polystyrene",
   "(╯°□°）╯︵ ┻━┻",
   "ಠ_ಠ",
