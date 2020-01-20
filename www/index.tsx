@@ -84,14 +84,22 @@ class App extends React.Component<{}, AppState> {
     };
 
     const bottomSection = this.state.inputValue ? (
-      <div className="ma4 ba pa3">
+      <div className="mt4 ba pa3">
         <WordsComponent inputValue={this.state.inputValue} />
       </div>
     ) : null;
 
     return (
-      <>
-        <div className="ma4 ba pa3">
+      <div className="ma4 pa3">
+        <header>
+          <h1 className="mb3 mt0 lh-title">
+            unicode.fyi
+          </h1>
+          <h2 className="f6 ttu tracked gray">
+            Unicode code point and grapheme cluster explorer
+          </h2>
+        </header>
+        <div className="mt4 ba pa3">
           <div className="w-100 flex flex-column">
             <InputComponent
               onInput={onInput}
@@ -121,7 +129,7 @@ class App extends React.Component<{}, AppState> {
           </div>
         </div>
         {bottomSection}
-      </>
+      </div>
     );
   }
 }
