@@ -84,7 +84,7 @@ class App extends React.Component<{}, AppState> {
     };
 
     const bottomSection = this.state.inputValue ? (
-      <div className="mt4 ba pa3">
+      <div className="mt4 ba">
         <WordsComponent inputValue={this.state.inputValue} />
       </div>
     ) : null;
@@ -185,7 +185,7 @@ const WordsComponent = (props: { inputValue: string }) => {
     );
   });
 
-  return <div className="overflow-scroll flex">{words}</div>;
+  return <div className="overflow-x-scroll flex">{words}</div>;
 };
 
 const WordComponent = (props: { word: Word }) => {
@@ -204,7 +204,7 @@ const WordComponent = (props: { word: Word }) => {
 
   return (
     <>
-      <div className="ba f6 pa3 ml1 h2 flex items-center">
+      <div className="br f6 pa3 h2 flex items-center">
         <div>{props.word.content}</div>
       </div>
       <div className="flex">{graphemeClusterComponents}</div>
@@ -240,7 +240,7 @@ const GraphemeClusterComponent = (props: {
 
   return (
     <>
-      <div className="ba f6 pa3 ml1 mt1 h2 flex items-center">
+      <div className="bt br f6 pa3 h2 flex items-center">
         <div>{props.graphemeCluster.content}</div>
       </div>
       <div className="flex">{codePointComponents}</div>
@@ -251,7 +251,7 @@ const GraphemeClusterComponent = (props: {
 const CodePointComponent = (props: { codePoint: CodePoint }) => {
   return (
     <div
-      className="ba pa3 mt1 ml1 nowrap tc flex flex-column"
+      className="bt br pa3 nowrap tc flex flex-column"
       style={{
         height: "10rem"
       }}
