@@ -104,14 +104,7 @@ class App extends React.Component<{}, AppState> {
 
     return (
       <div className="ma4 pa3 mw8 center">
-        <header>
-          <h1 className="mb3 mt0 lh-title">
-            unicode.fyi
-          </h1>
-          <h2 className="f6 ttu tracked gray">
-            Unicode code point and grapheme cluster explorer
-          </h2>
-        </header>
+        <Header></Header>
         <div className="mt4 ba pa3">
           <div className="w-100 flex flex-column">
             <InputComponent
@@ -165,6 +158,19 @@ const Button = (props: {
       </i>
       <div className="ml1">{props.text}</div>
     </button>
+  );
+};
+
+const Header = () => {
+  return (
+    <header>
+      <h1 className="mb3 mt0 lh-title">
+        unicode.fyi
+      </h1>
+      <h2 className="f6 ttu tracked gray">
+        Unicode code point and grapheme cluster explorer
+      </h2>
+    </header>
   );
 };
 
