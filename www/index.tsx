@@ -90,7 +90,7 @@ class App extends React.Component<{}, AppState> {
     ) : null;
 
     return (
-      <div className="ma4 pa3">
+      <div className="ma4 pa3 mw8 center">
         <header>
           <h1 className="mb3 mt0 lh-title">
             unicode.fyi
