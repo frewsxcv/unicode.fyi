@@ -83,61 +83,87 @@ class App extends React.Component<{}, AppState> {
       window.location.href = "https://github.com/frewsxcv/unicode.fyi";
     };
 
-    const bottomSection = this.state.inputValue ? (
-      <div className="ba mt4 flex">
-        <div className="br">
-          <div className="h2 f7 mt3 ph2">
-            Words
-          </div>
-          <div className="h2 f7 bt ph2">
-            Grapheme clusters
-          </div>
-          <div className="f7 bt ph2">
-            Code points
-          </div>
-        </div>
-        <div className="overflow-x-scroll">
-          <WordsComponent inputValue={this.state.inputValue} />
-        </div>
-      </div>
-    ) : null;
-
     return (
       <div className="ma4 pa3 mw8 center">
         <Header></Header>
-        <div className="mt4 ba pa3">
-          <div className="w-100 flex flex-column">
-            <InputComponent
-              onInput={onInput}
-              forceInput={this.state.forceInput}
-              defaultValue={this.state.inputValue}
-            />
-            <div className="flex">
-              <Button
-                marginLeft={false}
-                icon="shuffle"
-                text="Random"
-                onClick={onShuffleClick}
-              />
-              <Button
-                marginLeft={true}
-                icon="add"
-                text="Add code-point"
-                onClick={onAddClick}
-              />
-              <Button
-                marginLeft={true}
-                icon="code"
-                text="Source"
-                onClick={onSourceClick}
-              />
-            </div>
-          </div>
-        </div>
-        {bottomSection}
+        <InputSection onInput={onInput} onShuffleClick={onShuffleClick} onAddClick={onAddClick} onSourceClick={onSourceClick} forceInput={this.state.forceInput} inputValue={this.state.inputValue} />
+        <ExploreSection inputValue={this.state.inputValue} />
       </div>
     );
   }
+}
+
+
+type InputSectionProps = {
+  onInput(arg0: string): void;
+  onShuffleClick(): void;
+  onAddClick(): void;
+  onSourceClick(): void;
+  forceInput: boolean;
+  inputValue: string;
+};
+
+const InputSection = (props: InputSectionProps) => {
+  return (
+    <div className="mt4 ba pa3">
+      <div className="w-100 flex flex-column">
+        <InputComponent
+          onInput={props.onInput}
+          forceInput={props.forceInput}
+          defaultValue={props.inputValue}
+        />
+        <div className="flex">
+          <Button
+            marginLeft={false}
+            icon="shuffle"
+            text="Random"
+            onClick={props.onShuffleClick}
+          />
+          <Button
+            marginLeft={true}
+            icon="add"
+            text="Add code-point"
+            onClick={props.onAddClick}
+          />
+          <Button
+            marginLeft={true}
+            icon="code"
+            text="Source"
+            onClick={props.onSourceClick}
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+type ExploreSectionProps = {
+  inputValue: string,
+};
+
+const ExploreSection = (props: ExploreSectionProps) => {
+  if (!props.inputValue) {
+    return null;
+  }
+
+  return (
+    <div className="ba mt4 flex">
+      <div className="br">
+        <div className="h2 f7 mt3 ph2">
+          Words
+        </div>
+        <div className="h2 f7 bt ph2">
+          Grapheme clusters
+        </div>
+        <div className="f7 bt ph2">
+          Code points
+        </div>
+      </div>
+      <div className="overflow-x-scroll">
+        <WordsComponent inputValue={props.inputValue} />
+      </div>
+    </div>
+  );
 }
 
 const Button = (props: {
