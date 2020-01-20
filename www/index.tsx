@@ -84,8 +84,21 @@ class App extends React.Component<{}, AppState> {
     };
 
     const bottomSection = this.state.inputValue ? (
-      <div className="mt4 ba">
-        <WordsComponent inputValue={this.state.inputValue} />
+      <div className="ba mt4 flex">
+        <div className="br">
+          <div className="h2 f7 mt3 ph2">
+            Words
+          </div>
+          <div className="h2 f7 bt ph2">
+            Grapheme clusters
+          </div>
+          <div className="f7 bt ph2">
+            Code points
+          </div>
+        </div>
+        <div className="overflow-x-scroll">
+          <WordsComponent inputValue={this.state.inputValue} />
+        </div>
       </div>
     ) : null;
 
@@ -143,7 +156,7 @@ const Button = (props: {
   let classes =
     "f7 mt2 bg-transparent inline-flex items-center ba input-reset hover-bg-black hover-white pointer pa2";
   if (props.marginLeft) {
-    classes += " ml1";
+    classes += " ml2";
   }
   return (
     <button className={classes} onClick={props.onClick}>
@@ -185,7 +198,7 @@ const WordsComponent = (props: { inputValue: string }) => {
     );
   });
 
-  return <div className="overflow-x-scroll flex">{words}</div>;
+  return <div className="flex ba ma3">{words}</div>;
 };
 
 const WordComponent = (props: { word: Word }) => {
