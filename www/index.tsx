@@ -138,14 +138,14 @@ class App extends React.Component<{}, AppState> {
     };
 
     const bottomSection = this.state.inputValue ? (
-      <div className="shadow-4 ma4 bg-white br4 pa3">
+      <div className="ma4 ba pa3">
         <WordsComponent inputValue={this.state.inputValue} />
       </div>
     ) : null;
 
     return (
       <>
-        <div className="shadow-4 ma4 bg-white br4 pa3">
+        <div className="ma4 ba pa3">
           <div className="w-100 flex flex-column">
             <InputComponent
               onInput={onInput}
@@ -155,21 +155,18 @@ class App extends React.Component<{}, AppState> {
             <div className="flex">
               <Button
                 marginLeft={false}
-                bgColor="#df94c9"
                 icon="shuffle"
                 text="Random"
                 onClick={onShuffleClick}
               />
               <Button
                 marginLeft={true}
-                bgColor="#f49587"
                 icon="add"
                 text="Add code-point"
                 onClick={onAddClick}
               />
               <Button
                 marginLeft={true}
-                bgColor="#faba81"
                 icon="code"
                 text="Source"
                 onClick={onSourceClick}
@@ -185,21 +182,17 @@ class App extends React.Component<{}, AppState> {
 
 const Button = (props: {
   marginLeft: boolean;
-  bgColor: string;
   icon: string;
   text: string;
   onClick?(): void;
 }) => {
-  let classes = "f7 mt2 inline-flex items-center br2 bn white dim pointer pa2";
+  let classes =
+    "f7 mt2 inline-flex items-center ba input-reset hover-bg-black hover-white pointer pa2";
   if (props.marginLeft) {
     classes += " ml1";
   }
   return (
-    <button
-      className={classes}
-      style={{ backgroundColor: props.bgColor }}
-      onClick={props.onClick}
-    >
+    <button className={classes} onClick={props.onClick}>
       <i className="material-icons" style={{ fontSize: "18px" }}>
         {props.icon}
       </i>
@@ -221,8 +214,8 @@ const InputComponent = (props: {
       onInput={evt => props.onInput(evt.currentTarget.value)}
       defaultValue={props.defaultValue}
       value={props.forceInput ? props.defaultValue : undefined}
-      className="bn pa3 flex-auto br3"
-      style={{ backgroundColor: "#f6f6f4", resize: "vertical" }}
+      className="ba input-reset pa3 flex-auto"
+      style={{ resize: "vertical" }}
       placeholder="Enter text..."
       {...extraAttributes}
     />
@@ -257,20 +250,7 @@ const WordComponent = (props: { word: Word }) => {
 
   return (
     <>
-      <div
-        className="f6 pa3 ml1 bg-white h2 flex items-center custom-border-radius-sm-top"
-        style={{
-          borderStyle: "solid",
-          borderTopWidth: "5px",
-          borderTopColor: "lightgrey",
-          borderRightWidth: "1px",
-          borderRightColor: "rgb(240, 240, 240)",
-          borderLeftWidth: "1px",
-          borderLeftColor: "rgb(240, 240, 240)",
-          borderBottomWidth: "1px",
-          borderBottomColor: "rgb(240, 240, 240)"
-        }}
-      >
+      <div className="ba f6 pa3 ml1 h2 flex items-center">
         <div>{props.word.content}</div>
       </div>
       <div className="flex">{graphemeClusterComponents}</div>
@@ -306,14 +286,7 @@ const GraphemeClusterComponent = (props: {
 
   return (
     <>
-      <div
-        className="f6 pa3 ml1 mt1 bg-white h2 flex items-center"
-        style={{
-          borderStyle: "solid",
-          borderWidth: "1px",
-          borderColor: "rgb(240, 240, 240)"
-        }}
-      >
+      <div className="ba f6 pa3 ml1 mt1 h2 flex items-center">
         <div>{props.graphemeCluster.content}</div>
       </div>
       <div className="flex">{codePointComponents}</div>
@@ -324,25 +297,19 @@ const GraphemeClusterComponent = (props: {
 const CodePointComponent = (props: { codePoint: CodePoint }) => {
   return (
     <div
-      className="pa3 mt1 ml1 nowrap tc flex flex-column bg-white custom-border-radius-sm-bottom"
+      className="ba pa3 mt1 ml1 nowrap tc flex flex-column"
       style={{
-        height: "10rem",
-        borderStyle: "solid",
-        borderBottomWidth: "5px",
-        borderBottomColor: props.codePoint.category_color,
-        borderTopWidth: "1px",
-        borderTopColor: "rgb(240, 240, 240)",
-        borderRightWidth: "1px",
-        borderRightColor: "rgb(240, 240, 240)",
-        borderLeftWidth: "1px",
-        borderLeftColor: "rgb(240, 240, 240)"
+        height: "10rem"
       }}
     >
       <div className="flex">
         <div className="f6 w-50 tl font-family-condensed">
           {props.codePoint.code}
         </div>
-        <div className="f6 w-50 tr font-family-condensed ml3">
+        <div
+          className="f6 w-50 tr font-family-condensed ml3"
+          style={{ color: props.codePoint.category_color }}
+        >
           {props.codePoint.category_abbr}
         </div>
       </div>
