@@ -141,7 +141,7 @@ const Button = (props: {
   onClick?(): void;
 }) => {
   let classes =
-    "f7 mt2 inline-flex items-center ba input-reset hover-bg-black hover-white pointer pa2";
+    "f7 mt2 bg-transparent inline-flex items-center ba input-reset hover-bg-black hover-white pointer pa2";
   if (props.marginLeft) {
     classes += " ml1";
   }
