@@ -149,17 +149,17 @@ const ExploreSection = (props: ExploreSectionProps) => {
   return (
     <div className="ba mt4 flex">
       <div className="br">
-        <div className="h2 f7 mt3 ph2">
-          Words
+        <div className="h2 f7 bt mt3 pa3 flex items-center">
+          W
         </div>
-        <div className="h2 f7 bt ph2">
-          Grapheme clusters
+        <div className="h2 f7 bt pa3 flex items-center">
+          GC
         </div>
-        <div className="f7 bt ph2">
-          Code points
+        <div className="f7 bt bb pa3 pt3" style={{ height: "10rem" }}>
+          CP
         </div>
       </div>
-      <div className="overflow-x-scroll">
+      <div className="overflow-x-scroll flex">
         <WordsComponent inputValue={props.inputValue} />
       </div>
     </div>
@@ -224,7 +224,7 @@ const InputComponent = (props: {
 const WordsComponent = (props: { inputValue: string }) => {
   const words = unicodeInfo(props.inputValue).map((word, idx) => {
     return (
-      <div>
+      <div className="flex flex-column">
         <WordComponent word={word} key={idx} />
       </div>
     );
@@ -237,7 +237,7 @@ const WordComponent = (props: { word: Word }) => {
   const graphemeClusterComponents = props.word.grapheme_clusters.map(
     (graphemeCluster, idx) => {
       return (
-        <div>
+        <div className="flex flex-column">
           <GraphemeClusterComponent
             graphemeCluster={graphemeCluster}
             key={idx}
