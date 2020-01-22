@@ -86,13 +86,19 @@ class App extends React.Component<{}, AppState> {
     return (
       <div className="ma4 pa3 mw8 center">
         <Header></Header>
-        <InputSection onInput={onInput} onShuffleClick={onShuffleClick} onAddClick={onAddClick} onSourceClick={onSourceClick} forceInput={this.state.forceInput} inputValue={this.state.inputValue} />
+        <InputSection
+          onInput={onInput}
+          onShuffleClick={onShuffleClick}
+          onAddClick={onAddClick}
+          onSourceClick={onSourceClick}
+          forceInput={this.state.forceInput}
+          inputValue={this.state.inputValue}
+        />
         <ExploreSection inputValue={this.state.inputValue} />
       </div>
     );
   }
 }
-
 
 type InputSectionProps = {
   onInput(arg0: string): void;
@@ -148,7 +154,10 @@ const ExploreKey = () => {
         {/* https://www.unicode.org/reports/tr29/#Grapheme_Cluster_Boundaries */}
         <abbr title="Grapheme clusters, as defined in UAX #29">GC</abbr>
       </div>
-      <div className="f7 bt bb pa3 pt3 justify-center" style={{ height: "10rem" }}>
+      <div
+        className="f7 bt bb pa3 pt3 justify-center"
+        style={{ height: "10rem" }}
+      >
         {/* https://unicode.org/glossary/#code_point */}
         CP
       </div>
@@ -157,7 +166,7 @@ const ExploreKey = () => {
 };
 
 type ExploreSectionProps = {
-  inputValue: string,
+  inputValue: string;
 };
 
 const ExploreSection = (props: ExploreSectionProps) => {
@@ -173,7 +182,7 @@ const ExploreSection = (props: ExploreSectionProps) => {
       </div>
     </div>
   );
-}
+};
 
 const Button = (props: {
   marginLeft: boolean;
@@ -199,9 +208,7 @@ const Button = (props: {
 const Header = () => {
   return (
     <header>
-      <h1 className="mb3 mt0 lh-title">
-        unicode.fyi
-      </h1>
+      <h1 className="mb3 mt0 lh-title">unicode.fyi</h1>
       <h2 className="f6 ttu tracked gray">
         Unicode code point and grapheme cluster explorer
       </h2>
@@ -239,7 +246,11 @@ const WordsComponent = (props: { inputValue: string }) => {
     );
   });
 
-  return <div className={`flex ba ${EXPLORE_COMPONENT_INNER_BORDER_COLOR} ma3`}>{words}</div>;
+  return (
+    <div className={`flex ba ${EXPLORE_COMPONENT_INNER_BORDER_COLOR} ma3`}>
+      {words}
+    </div>
+  );
 };
 
 const EXPLORE_COMPONENT_INNER_BORDER_COLOR = "b--black-20";
@@ -260,7 +271,9 @@ const WordComponent = (props: { word: Word }) => {
 
   return (
     <>
-      <div className={`br f6 ${EXPLORE_COMPONENT_INNER_BORDER_COLOR} pa3 h2 flex items-center`}>
+      <div
+        className={`br f6 ${EXPLORE_COMPONENT_INNER_BORDER_COLOR} pa3 h2 flex items-center`}
+      >
         <div>{props.word.content}</div>
       </div>
       <div className="flex">{graphemeClusterComponents}</div>
@@ -296,7 +309,9 @@ const GraphemeClusterComponent = (props: {
 
   return (
     <>
-      <div className={`bt br ${EXPLORE_COMPONENT_INNER_BORDER_COLOR} f6 pa3 h2 flex items-center`}>
+      <div
+        className={`bt br ${EXPLORE_COMPONENT_INNER_BORDER_COLOR} f6 pa3 h2 flex items-center`}
+      >
         <div>{props.graphemeCluster.content}</div>
       </div>
       <div className="flex">{codePointComponents}</div>
