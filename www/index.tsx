@@ -149,15 +149,15 @@ const ExploreSection = (props: ExploreSectionProps) => {
   return (
     <div className="ba mt4 flex">
       <div className="br">
-        <div className="h2 f7 bt mt3 pa3 flex items-center">
+        <div className="h2 f7 bt mt3 pa3 flex items-center justify-center">
           {/* https://www.unicode.org/reports/tr29/#Word_Boundaries */}
           <abbr title="Words, as defined in UAX #29">W</abbr>
         </div>
-        <div className="h2 f7 bt pa3 flex items-center">
+        <div className="h2 f7 bt pa3 flex items-center justify-center">
           {/* https://www.unicode.org/reports/tr29/#Grapheme_Cluster_Boundaries */}
           <abbr title="Grapheme clusters, as defined in UAX #29">GC</abbr>
         </div>
-        <div className="f7 bt bb pa3 pt3" style={{ height: "10rem" }}>
+        <div className="f7 bt bb pa3 pt3 justify-center" style={{ height: "10rem" }}>
           {/* https://unicode.org/glossary/#code_point */}
           CP
         </div>
