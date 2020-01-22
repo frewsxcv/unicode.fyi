@@ -233,8 +233,10 @@ const WordsComponent = (props: { inputValue: string }) => {
     );
   });
 
-  return <div className="flex ba ma3">{words}</div>;
+  return <div className={`flex ba ${EXPLORE_COMPONENT_INNER_BORDER_COLOR} ma3`}>{words}</div>;
 };
+
+const EXPLORE_COMPONENT_INNER_BORDER_COLOR = "b--black-20";
 
 const WordComponent = (props: { word: Word }) => {
   const graphemeClusterComponents = props.word.grapheme_clusters.map(
@@ -252,7 +254,7 @@ const WordComponent = (props: { word: Word }) => {
 
   return (
     <>
-      <div className="br f6 pa3 h2 flex items-center">
+      <div className={`br f6 ${EXPLORE_COMPONENT_INNER_BORDER_COLOR} pa3 h2 flex items-center`}>
         <div>{props.word.content}</div>
       </div>
       <div className="flex">{graphemeClusterComponents}</div>
@@ -288,7 +290,7 @@ const GraphemeClusterComponent = (props: {
 
   return (
     <>
-      <div className="bt br f6 pa3 h2 flex items-center">
+      <div className={`bt br ${EXPLORE_COMPONENT_INNER_BORDER_COLOR} f6 pa3 h2 flex items-center`}>
         <div>{props.graphemeCluster.content}</div>
       </div>
       <div className="flex">{codePointComponents}</div>
@@ -299,7 +301,7 @@ const GraphemeClusterComponent = (props: {
 const CodePointComponent = (props: { codePoint: CodePoint }) => {
   return (
     <div
-      className="bt br pa3 nowrap tc flex flex-column"
+      className={`bt br ${EXPLORE_COMPONENT_INNER_BORDER_COLOR} pa3 nowrap tc flex flex-column`}
       style={{
         height: "10rem"
       }}
