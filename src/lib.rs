@@ -73,10 +73,16 @@ pub struct CodePoint {
     is_uppercase: bool,
     is_white_space: bool,
     name: String,
+    utf8_bytes: Vec<u8>,
+    utf16_bytes: Vec<u16>,
 }
 
 impl CodePoint {
     fn from_char(c: char) -> Self {
+        let mut utf8_bytes = vec![0; c.len_utf8()];
+        c.encode_utf8(&mut utf8_bytes);
+        let mut utf16_bytes = vec![0; c.len_utf16()];
+        c.encode_utf16(&mut utf16_bytes);
         CodePoint {
             age: char_age(c),
             category: char_category(c).to_string(),
@@ -91,6 +97,8 @@ impl CodePoint {
             is_uppercase: unic_ucd::Uppercase::of(c).as_bool(),
             is_white_space: unic_ucd::WhiteSpace::of(c).as_bool(),
             name: char_name(c),
+            utf8_bytes,
+            utf16_bytes,
         }
     }
 }

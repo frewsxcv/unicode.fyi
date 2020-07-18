@@ -29,6 +29,8 @@ interface CodePoint {
   is_uppercase: boolean;
   is_white_space: boolean;
   name: string;
+  utf8_bytes: number[];
+  utf16_bytes: number[];
 }
 
 const unicodeInfo = (s: string): Word[] => {
@@ -155,11 +157,17 @@ const ExploreKey = () => {
         <abbr title="Grapheme clusters, as defined in UAX #29">GC</abbr>
       </div>
       <div
-        className="f7 bt bb pa3 pt3 justify-center"
+        className="f7 bt pa3 flex justify-center"
         style={{ height: "10rem" }}
       >
         {/* https://unicode.org/glossary/#code_point */}
         CP
+      </div>
+      <div className="h2 f7 bt pa3 flex items-center justify-center">
+        UTF-8
+      </div>
+      <div className="h2 f7 bt bb pa3 flex items-center justify-center">
+        UTF-16
       </div>
     </div>
   );
@@ -302,6 +310,8 @@ const GraphemeClusterComponent = (props: {
       return (
         <div>
           <CodePointComponent codePoint={codePoint} key={idx} />
+          <BytesComponent bytes={codePoint.utf8_bytes} />
+          <BytesComponent bytes={codePoint.utf16_bytes} />
         </div>
       );
     }
@@ -345,6 +355,22 @@ const CodePointComponent = (props: { codePoint: CodePoint }) => {
     </div>
   );
 };
+
+const BytesComponent = (props: { bytes: number[] }) => {
+  const bytes = props.bytes.map((n) => `0x${n.toString(16)}`);
+  const inner = bytes.map(byte => {
+    return (
+      <div className={'pr2'}>{byte}</div>
+    );
+  });
+  return (
+    <div
+      className={`f7 bt br ${EXPLORE_COMPONENT_INNER_BORDER_COLOR} pa3 h2 nowrap tc flex items-center code`}
+    >
+      {inner}
+    </div>
+  );
+}
 
 const setInputValueInUrl = (inputValue: string) => {
   window.history.replaceState({}, "", "?q=" + encodeURIComponent(inputValue));
