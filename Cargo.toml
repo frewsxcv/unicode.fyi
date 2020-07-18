@@ -31,7 +31,7 @@ unic = "0.9.0"
 serde = { version = "1.0", features = ["derive"] }
 
 [dev-dependencies]
-wasm-bindgen-test = "0.2"
+wasm-bindgen-test = "0.3"
 
 [profile.release]
 # Tell `rustc` to optimize for small code size.
