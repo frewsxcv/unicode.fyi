@@ -200,7 +200,6 @@ fn ascii_string_to_title_case(s: String) -> String {
     String::from_utf8(bytes).unwrap()
 }
 
-use wasm_bindgen::prelude::*;
 use yew::prelude::*;
 
 struct Model {
@@ -216,17 +215,11 @@ impl Component for Model {
     type Message = Msg;
     type Properties = ();
     fn create(_: Self::Properties, link: ComponentLink<Self>) -> Self {
-        Self {
-            link,
-            value: 0,
-        }
+        Self { link, value: 0 }
     }
 
-    fn update(&mut self, msg: Self::Message) -> ShouldRender {
-        match msg {
-            Msg::AddOne => self.value += 1
-        }
-        true
+    fn update(&mut self, _msg: Self::Message) -> ShouldRender {
+        false
     }
 
     fn change(&mut self, _props: Self::Properties) -> ShouldRender {
@@ -239,12 +232,56 @@ impl Component for Model {
     fn view(&self) -> Html {
         html! {
             <div>
+                <BytesComponent bytes=vec![0, 1] />
                 <button onclick=self.link.callback(|_| Msg::AddOne)>{ "+1" }</button>
                 <p>{ self.value }</p>
             </div>
         }
     }
 }
+
+struct BytesComponent(Vec<u8>);
+
+#[derive(Clone, yew::Properties)]
+struct BytesComponentProps {
+    bytes: Vec<u8>,
+}
+
+impl Component for BytesComponent {
+    type Message = Msg;
+    type Properties = BytesComponentProps;
+
+    fn create(props: Self::Properties, _link: ComponentLink<Self>) -> Self {
+        Self(props.bytes)
+    }
+
+    fn update(&mut self, _msg: Self::Message) -> ShouldRender {
+        false
+    }
+
+    fn change(&mut self, _props: Self::Properties) -> ShouldRender {
+        false
+    }
+
+    fn view(&self) -> Html {
+        html! {
+            // <div
+            // class={`f7 bt br ${EXPLORE_COMPONENT_INNER_BORDER_COLOR} pa3 h2 nowrap tc flex items-center code`}
+            // >
+            // {inner}
+            // </div>
+        }
+    }
+}
+
+// fn BytesComponent(utf) = (props: { bytes: number[] }) => {
+//   const bytes = props.bytes.map((n) => `0x${n.toString(16)}`);
+//   const inner = bytes.map(byte => {
+//     return (
+//       <div className={'pr2'}>{byte}</div>
+//     );
+//   });
+// }
 
 #[wasm_bindgen(start)]
 pub fn run_app() {
