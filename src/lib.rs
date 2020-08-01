@@ -242,12 +242,9 @@ impl Component for Model {
 
 const EXPLORE_COMPONENT_INNER_BORDER_COLOR: &str = "b--black-20";
 
-struct BytesComponent {
-    bytes: Vec<u8>,
-    code_unit_byte_len: u8,
-}
+struct BytesComponent(BytesComponentProps);
 
-#[derive(Clone, yew::Properties)]
+#[derive(Clone, PartialEq, yew::Properties)]
 struct BytesComponentProps {
     bytes: Vec<u8>,
     code_unit_byte_len: u8,
@@ -258,26 +255,29 @@ impl Component for BytesComponent {
     type Properties = BytesComponentProps;
 
     fn create(props: Self::Properties, _link: ComponentLink<Self>) -> Self {
-        Self {
-            bytes: props.bytes,
-            code_unit_byte_len: props.code_unit_byte_len,
-        }
+        Self(props)
     }
 
     fn update(&mut self, _msg: Self::Message) -> ShouldRender {
         false
     }
 
-    fn change(&mut self, _props: Self::Properties) -> ShouldRender {
-        false
+    fn change(&mut self, props: Self::Properties) -> ShouldRender {
+        if self.0 != props {
+            self.0 = props;
+            true
+        } else {
+            false
+        }
     }
 
     fn view(&self) -> Html {
         let inner = self
+            .0
             .bytes
             .iter()
-            .map(|b| format_byte(*b, self.code_unit_byte_len))
-            .map(|b| html!{ <div class="pr2">{ b }</div> })
+            .map(|b| format_byte(*b, self.0.code_unit_byte_len))
+            .map(|b| html! { <div class="pr2">{ b }</div> })
             .collect::<Html>();
         html! {
             <div class=format!("f7 bt br {} pa3 h2 nowrap tc flex items-center code", EXPLORE_COMPONENT_INNER_BORDER_COLOR)>
