@@ -18,19 +18,14 @@ impl yew::Component for App {
 
     fn view(&self) -> yew::Html {
         let string = "Denmark 🇩🇰";
-        string
-            .chars()
-            .map(|code_point| {
-                let mut utf8_bytes = vec![0; code_point.len_utf8()];
-                code_point.encode_utf8(&mut utf8_bytes);
-                let mut utf16_bytes = vec![0; code_point.len_utf16()];
-                code_point.encode_utf16(&mut utf16_bytes);
+        unic::segment::Graphemes::new(string)
+            .map(|gc_str| {
                 yew::html! {
                     <div>
-                        <BytesComponent<u8> bytes=utf8_bytes />
-                        <BytesComponent<u16> bytes=utf16_bytes />
+                        <grapheme_cluster::Component grapheme_cluster=gc_str />
                     </div>
                 }
+
             })
             .collect::<yew::Html>()
     }
@@ -39,12 +34,11 @@ impl yew::Component for App {
 const EXPLORE_COMPONENT_INNER_BORDER_COLOR: &str = "b--black-20";
 
 mod grapheme_cluster {
-    struct Component(Props);
+    pub struct Component(Props);
 
     #[derive(Clone, PartialEq, yew::Properties)]
-    struct Props {
-        content: String,
-        code_points: Vec<crate::CodePoint>,
+    pub struct Props {
+        pub grapheme_cluster: String,
     }
 
     impl yew::Component for Component {
@@ -71,14 +65,18 @@ mod grapheme_cluster {
         fn view(&self) -> yew::Html {
             let code_points_components = self
                 .0
-                .code_points
-                .iter()
+                .grapheme_cluster
+                .chars()
                 .map(|code_point| {
+                    let mut utf8_bytes = vec![0; code_point.len_utf8()];
+                    code_point.encode_utf8(&mut utf8_bytes);
+                    let mut utf16_bytes = vec![0; code_point.len_utf16()];
+                    code_point.encode_utf16(&mut utf16_bytes);
                     yew::html! {
                         <div>
                             // <CodePointComponent codePoint={codePoint} key={idx} />
-                            <super::BytesComponent<u8> bytes={code_point.utf8_bytes.clone()} />
-                            <super::BytesComponent<u16> bytes={code_point.utf16_bytes.clone()} />
+                            <super::BytesComponent<u8> bytes={utf8_bytes} />
+                            <super::BytesComponent<u16> bytes={utf16_bytes} />
                         </div>
                     }
                 })
@@ -86,7 +84,7 @@ mod grapheme_cluster {
             yew::html! {
                 <>
                     <div class=format!("bt br {} f6 pa3 h2 flex items-center", super::EXPLORE_COMPONENT_INNER_BORDER_COLOR)>
-                        <div>{ self.0.content.clone() }</div>
+                        <div>{ self.0.grapheme_cluster.clone() }</div>
                     </div>
                     <div className="flex">{code_points_components}</div>
                 </>
