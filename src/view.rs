@@ -17,12 +17,22 @@ impl yew::Component for App {
     }
 
     fn view(&self) -> yew::Html {
-        yew::html! {
-            <div>
-                <BytesComponent<u8> bytes=vec![0, 1, 2, 3] />
-                <BytesComponent<u16> bytes=vec![0, 1, 2, 3] />
-            </div>
-        }
+        let string = "Denmark 🇩🇰";
+        string
+            .chars()
+            .map(|code_point| {
+                let mut utf8_bytes = vec![0; code_point.len_utf8()];
+                code_point.encode_utf8(&mut utf8_bytes);
+                let mut utf16_bytes = vec![0; code_point.len_utf16()];
+                code_point.encode_utf16(&mut utf16_bytes);
+                yew::html! {
+                    <div>
+                        <BytesComponent<u8> bytes=utf8_bytes />
+                        <BytesComponent<u16> bytes=utf16_bytes />
+                    </div>
+                }
+            })
+            .collect::<yew::Html>()
     }
 }
 
