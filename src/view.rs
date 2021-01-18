@@ -19,9 +19,8 @@ impl yew::Component for App {
     fn view(&self) -> yew::Html {
         yew::html! {
             <div>
-                <BytesComponent bytes=vec![0, 1] code_unit_byte_len=1 />
-                // <button onclick=self.link.callback(|_| Msg::AddOne)>{ "+1" }</button>
-                // <p>{ self.value }</p>
+                <BytesComponent<u8> bytes=vec![0, 1, 2, 3] />
+                <BytesComponent<u16> bytes=vec![0, 1, 2, 3] />
             </div>
         }
     }
@@ -68,8 +67,8 @@ mod grapheme_cluster {
                     yew::html! {
                         <div>
                             // <CodePointComponent codePoint={codePoint} key={idx} />
-                            <super::BytesComponent bytes={code_point.utf8_bytes.clone()} code_unit_byte_len={1} />
-                            // <super::BytesComponent bytes={code_point.utf16_bytes} />
+                            <super::BytesComponent<u8> bytes={code_point.utf8_bytes.clone()} />
+                            <super::BytesComponent<u16> bytes={code_point.utf16_bytes.clone()} />
                         </div>
                     }
                 })
@@ -86,17 +85,16 @@ mod grapheme_cluster {
     }
 }
 
-struct BytesComponent(BytesComponentProps);
+struct BytesComponent<B: Byte>(BytesComponentProps<B>);
 
 #[derive(Clone, PartialEq, yew::Properties)]
-struct BytesComponentProps {
-    bytes: Vec<u8>,
-    code_unit_byte_len: u8,
+struct BytesComponentProps<B: Byte> {
+    bytes: Vec<B>,
 }
 
-impl yew::Component for BytesComponent {
+impl<B: 'static + Byte> yew::Component for BytesComponent<B> {
     type Message = ();
-    type Properties = BytesComponentProps;
+    type Properties = BytesComponentProps<B>;
 
     fn create(props: Self::Properties, _link: yew::ComponentLink<Self>) -> Self {
         Self(props)
@@ -120,8 +118,7 @@ impl yew::Component for BytesComponent {
             .0
             .bytes
             .iter()
-            .map(|b| format_byte(*b, self.0.code_unit_byte_len))
-            .map(|b| yew::html! { <div class="pr2">{ b }</div> })
+            .map(|b| yew::html! { <div class="pr2">{ b.formatted() }</div> })
             .collect::<yew::Html>();
         yew::html! {
             <div class=format!("f7 bt br {} pa3 h2 nowrap tc flex items-center code", EXPLORE_COMPONENT_INNER_BORDER_COLOR)>
@@ -131,10 +128,18 @@ impl yew::Component for BytesComponent {
     }
 }
 
-fn format_byte(byte: u8, code_unit_byte_len: u8) -> String {
-    match code_unit_byte_len {
-        1 => format!("{:#04x}", byte),
-        2 => format!("{:#06x}", byte),
-        _ => unimplemented!(),
+trait Byte: Clone + PartialEq {
+    fn formatted(&self) -> String;
+}
+
+impl Byte for u8 {
+    fn formatted(&self) -> String {
+        format!("{:#04x}", self)
+    }
+}
+
+impl Byte for u16 {
+    fn formatted(&self) -> String {
+        format!("{:#06x}", self)
     }
 }
