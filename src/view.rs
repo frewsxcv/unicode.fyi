@@ -68,7 +68,7 @@ mod grapheme_cluster {
                     yew::html! {
                         <div>
                             // <CodePointComponent codePoint={codePoint} key={idx} />
-                            <super::BytesComponent bytes={code_point.utf8_bytes} />
+                            <super::BytesComponent bytes={code_point.utf8_bytes.clone()} code_unit_byte_len={1} />
                             // <super::BytesComponent bytes={code_point.utf16_bytes} />
                         </div>
                     }
@@ -77,7 +77,7 @@ mod grapheme_cluster {
             yew::html! {
                 <>
                     <div class=format!("bt br {} f6 pa3 h2 flex items-center", super::EXPLORE_COMPONENT_INNER_BORDER_COLOR)>
-                        <div>{ self.0.content }</div>
+                        <div>{ self.0.content.clone() }</div>
                     </div>
                     <div className="flex">{code_points_components}</div>
                 </>
