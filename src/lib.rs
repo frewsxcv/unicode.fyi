@@ -59,7 +59,7 @@ impl GraphemeCluster {
 }
 
 #[wasm_bindgen]
-#[derive(Debug, Serialize)]
+#[derive(Debug, Clone, Serialize, PartialEq)]
 pub struct CodePoint {
     age: String,
     category: String,
