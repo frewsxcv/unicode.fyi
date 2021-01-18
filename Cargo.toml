@@ -39,5 +39,6 @@ wasm-bindgen-test = "0.3"
 # Tell `rustc` to optimize for small code size.
 opt-level = "s"
 
+# As of 2020-01-17, wasm-pack + wasm-opt does not work on Apple Silicon
 [package.metadata.wasm-pack.profile.release]
 wasm-opt = false
