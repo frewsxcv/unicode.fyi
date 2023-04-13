@@ -74,7 +74,7 @@ mod grapheme_cluster {
                     code_point.encode_utf16(&mut utf16_bytes);
                     yew::html! {
                         <div>
-                            // <CodePointComponent codePoint={codePoint} key={idx} />
+                            <super::CodePointComponent code_point={code_point} />
                             <super::BytesComponent<u8> bytes={utf8_bytes} />
                             <super::BytesComponent<u16> bytes={utf16_bytes} />
                         </div>
@@ -90,6 +90,40 @@ mod grapheme_cluster {
                 </>
             }
         }
+    }
+}
+
+struct CodePointComponent(CodePointComponentProps);
+
+#[derive(Clone, PartialEq, yew::Properties)]
+struct CodePointComponentProps {
+    code_point: char,
+}
+impl yew::Component for CodePointComponent {
+    type Message = ();
+    type Properties = CodePointComponentProps;
+
+    fn create(props: Self::Properties, _link: yew::ComponentLink<Self>) -> Self {
+        Self(props)
+    }
+
+    fn update(&mut self, _msg: Self::Message) -> yew::ShouldRender {
+        false
+    }
+
+    fn change(&mut self, props: Self::Properties) -> yew::ShouldRender {
+        if self.0 != props {
+            self.0 = props;
+            true
+        } else {
+            false
+        }
+    }
+
+    fn view(&self) -> yew::Html {
+        <div class=format!("f7 bt br {} pa3 h2 nowrap tc flex items-center code", EXPLORE_COMPONENT_INNER_BORDER_COLOR)>
+        {inner}
+        </div>
     }
 }
 
